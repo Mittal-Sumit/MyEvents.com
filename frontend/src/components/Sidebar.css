@@ -1,0 +1,44 @@
+/* frontend/src/components/Sidebar.css */
+.burger-menu {
+    font-size: 24px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #333; /* Changed color to a darker shade for visibility */
+    margin: 10px;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000; /* Ensures the button is always on top */
+}
+
+.sidebar {
+    width: 200px;
+    height: 100%;
+    position: fixed;
+    left: -200px; /* Hide the sidebar initially */
+    top: 0;
+    background-color: #f4f4f4;
+    overflow-x: hidden;
+    transition: all 0.3s ease;
+}
+
+.sidebar.open {
+    left: 0; /* Show the sidebar when open */
+}
+
+.sidebar-nav {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+}
+
+.sidebar-nav li:hover {
+    background-color: #ddd;
+}

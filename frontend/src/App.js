@@ -3,6 +3,7 @@ import React from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Sidebar from './components/Sidebar';
+import Register from './components/Register';
 import './App.css';
 
 const App = () => {
@@ -11,6 +12,7 @@ const App = () => {
             <Header />
             <Sidebar />
             <div className="content">
+            <Register /> 
                 {/* Main content will go here */}
             </div>
             <Footer />

@@ -1,0 +1,25 @@
+/* frontend/src/Home.css */
+
+.home-header {
+    position: relative; /* Relative positioning for the container */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.logout-button {
+    position: absolute; /* Position absolutely within the relative container */
+    top: 10px; /* Adjusts the vertical position */
+    right: 20px; /* Adjusts the horizontal position */
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    background-color: #c82333;
+}

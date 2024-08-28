@@ -27,10 +27,10 @@
     left: 0; /* Show the sidebar when open */
 }
 
-.sidebar-nav {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+.sidebar-nav ul {
+    list-style-type: none !important; /* Remove bullets and force this style */
+    padding: 0 !important; /* Ensure no padding */
+    margin: 0 !important; /* Ensure no margin */
 }
 
 .sidebar-nav li {

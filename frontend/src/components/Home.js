@@ -1,28 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from './Header';
-import Sidebar from './Sidebar';
-import Footer from './Footer';
-import './Home.css'; // Create or use an existing CSS file for additional styles
+import Sidebar from './Sidebar';  // Ensure correct path
+import Footer from './Footer';    // Ensure correct path
+import './Home.css';              // Import the CSS file for styling
 
 const Home = () => {
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        navigate('/login');
+        navigate('/login');  // Navigate to login page on logout
+    };
+
+    const toggleSidebar = () => {
+        setIsSidebarOpen(prevState => !prevState);
     };
 
     return (
-        <div className="App">
-            <Header />
-            <Sidebar />
+        <div className={`home-page ${isSidebarOpen ? 'blur-background' : ''}`}>
+            <div className="header">
+                <button 
+                    className={`burger-menu ${isSidebarOpen ? 'highlight' : ''}`}
+                    onClick={toggleSidebar}
+                >
+                    ☰
+                </button>
+                <button className="logout-button" onClick={handleLogout}>Logout</button>
+                {/* Image is set as background, no text needed */}
+            </div>
+
+            <div className={`sidebar ${isSidebarOpen ? '' : 'sidebar-closed'}`}>
+                <Sidebar />
+            </div>
+
             <div className="content">
-                <div className="home-header">
-                    <h2>Welcome to the Home Page</h2>
-                    <button onClick={handleLogout} className="logout-button">Logout</button>
-                </div>
+                <h1>EVENTS</h1>
                 {/* Additional content can go here */}
             </div>
+
             <Footer />
         </div>
     );

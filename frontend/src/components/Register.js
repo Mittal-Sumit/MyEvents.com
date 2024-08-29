@@ -1,6 +1,9 @@
+// src/components/Register.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Typography } from '@mui/material';
+import './AuthStyles.css'; // Import the updated CSS file
 
 const Register = () => {
     const [username, setUsername] = useState('');
@@ -18,38 +21,50 @@ const Register = () => {
                 password,
             });
             setMessage('Registration successful! Please log in.');
-            navigate('/login'); // Redirect to login after successful registration
+            navigate('/login');
         } catch (error) {
             setMessage('There was an error registering the user.');
             console.error('Registration error:', error);
         }
     };
 
+    const handleBackToLogin = () => {
+        navigate('/login');
+    };
+
     return (
-        <div className="auth-section">
-            <h2>Register</h2>
+        <div className="auth-container">
+            <Typography variant="h5" gutterBottom>
+                Register
+            </Typography>
             <form onSubmit={handleSubmit}>
-                <input 
-                    type="text" 
-                    placeholder="Username" 
-                    value={username} 
-                    onChange={(e) => setUsername(e.target.value)} 
+                <input
+                    className="auth-input"
+                    type="text"
+                    placeholder="Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                 />
-                <input 
-                    type="email" 
-                    placeholder="Email" 
-                    value={email} 
-                    onChange={(e) => setEmail(e.target.value)} 
+                <input
+                    className="auth-input"
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                 />
-                <input 
-                    type="password" 
-                    placeholder="Password" 
-                    value={password} 
-                    onChange={(e) => setPassword(e.target.value)} 
+                <input
+                    className="auth-input"
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                 />
-                <button type="submit">Register</button>
-                {message && <p>{message}</p>}
+                <input type="submit" className="auth-button" value="Register" />
+                {message && <Typography color="error">{message}</Typography>}
             </form>
+            <button className="auth-link-button" onClick={handleBackToLogin}>
+                Back to Login
+            </button>
         </div>
     );
 };

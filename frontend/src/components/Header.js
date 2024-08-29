@@ -5,7 +5,7 @@ import './Header.css';
 const Header = () => {
     return (
         <header className="header">
-            <h1>Event Management Platform</h1>
+            <h1>MyEvent.com</h1>
         </header>
     );
 };

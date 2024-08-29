@@ -1,25 +1,112 @@
-/* frontend/src/Home.css */
+/* src/components/Home.css */
 
-.home-header {
-    position: relative; /* Relative positioning for the container */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
+/* General Body Style */
+body {
+    background-color: #FFFFFF; /* White background for the entire page */
+    color: #333333; /* Dark grey text for general readability */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
+/* Header Style */
+.header {
+    background-image: url(C:\Users\susha\OneDrive\Desktop\MyEvent.com\frontend\public\headerimage1.png); /* Replace with the path to your new image */
+    background-size: contain; /* Make sure the image covers the whole header */
+    height: 75vh; /* 75% of the viewport height */
+    color: transparent; /* Hide any text color */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Header Text */
+.header h1 {
+    color: #FFFFFF; /* White color for header text */
+    margin: 0;
+}
+
+/* Logout Button */
 .logout-button {
-    position: absolute; /* Position absolutely within the relative container */
-    top: 10px; /* Adjusts the vertical position */
-    right: 20px; /* Adjusts the horizontal position */
+    position: absolute;
+    top: 10px;
+    right: 20px;
     padding: 10px 20px;
-    background-color: #dc3545;
+    background-color: #555555; /* Slightly lighter grey for button */
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .logout-button:hover {
-    background-color: #c82333;
+    background-color: #444444; /* Even darker grey on hover */
+}
+
+/* Burger Menu Button */
+.burger-menu {
+    font-size: 24px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #FFFFFF; /* White color for burger menu icon */
+    margin: 10px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 2000; /* On top */
+    transition: color 0.3s ease;
+}
+
+.burger-menu.highlight {
+    color: #CCCCCC; /* Light grey when highlighted */
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: #F0F0F0; /* Light grey background for sidebar */
+    color: #333333; /* Dark grey text for sidebar items */
+    padding: 20px;
+    width: 250px; /* Sidebar width */
+    position: fixed;
+    height: 100%;
+    left: 0;
+    top: 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Sidebar level */
+    transition: transform 0.3s ease; /* Smooth opening */
+    transform: translateX(0); /* Visible state */
+}
+
+.sidebar-closed {
+    transform: translateX(-100%); /* Hidden state */
+}
+
+/* Content */
+.content {
+    margin-left: 250px; /* Adjust for sidebar width */
+    padding: 20px;
+    background-color: #FFFFFF; /* White background for content area */
+    min-height: 100vh;
+    color: #333333; /* Dark grey text for content */
+    transition: filter 0.3s ease;
+    text-align: center;
+}
+
+/* Blur Effect */
+.blur-background .content {
+    filter: blur(5px);
+}
+
+/* Footer */
+.footer {
+    background-color: #333; /* Dark grey background */
+    color: white; /* White text */
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    position: relative; /* This keeps it in flow until scrolling to the bottom */
 }

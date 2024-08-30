@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Typography } from '@mui/material';
-import './AuthStyles.css'; // Import the updated CSS file
+import './AuthStyles.css'; 
 
 const Register = () => {
     const [username, setUsername] = useState('');

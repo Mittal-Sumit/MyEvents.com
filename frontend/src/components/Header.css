@@ -1,7 +1,11 @@
 /* frontend/src/components/Header.css */
+/* src/components/Header.css */
+
 .header {
-    background-color: #808080; /* Set background color to a greyish shade */
-    color: white;
-    padding: 10px;
+    background-color: #333; /* Dark grey background */
+    color: white; /* White text */
+    padding: 20px;
     text-align: center;
+    font-size: 24px;
+    font-weight: bold;
 }

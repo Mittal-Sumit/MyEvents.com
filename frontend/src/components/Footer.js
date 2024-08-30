@@ -4,8 +4,8 @@ import './Footer.css';
 
 const Footer = () => {
     return (
-        <footer className="footer">
-            <p>&copy; 2024 MyEvent</p>
+        <footer className="main-footer">  {/* Updated to match Footer.css */}
+            <p>&copy; 2024 MyEvent.com</p>
         </footer>
     );
 };

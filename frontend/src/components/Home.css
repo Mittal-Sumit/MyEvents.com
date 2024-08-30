@@ -1,29 +1,32 @@
-/* src/components/Home.css */
 
-/* General Body Style */
-body {
+html,body {
     background-color: #FFFFFF; /* White background for the entire page */
-    color: #333333; /* Dark grey text for general readability */
-    font-family: 'Arial', sans-serif;
+    color: black; /* Dark grey text for general readability */
+    font-family: 'Open Sans', sans-serif;
     margin: 0;
     padding: 0;
+    width: 100%;
+    height: 100%;
 }
 
 /* Header Style */
-.header {
-    background-image: url(C:\Users\susha\OneDrive\Desktop\MyEvent.com\frontend\public\headerimage1.png); /* Replace with the path to your new image */
-    background-size: contain; /* Make sure the image covers the whole header */
-    height: 75vh; /* 75% of the viewport height */
+.main-header {
+    background-image: url(C:\Users\susha\OneDrive\Desktop\MyEvent.com\frontend\public\concert.jpg);
+    background-size: cover;
+    background-position: center; 
+    height: 100vh; /* 75% of the viewport height */
     color: transparent; /* Hide any text color */
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* Header Text */
-.header h1 {
+.main-header h1 {
     color: #FFFFFF; /* White color for header text */
     margin: 0;
 }
@@ -31,15 +34,16 @@ body {
 /* Logout Button */
 .logout-button {
     position: absolute;
-    top: 10px;
+    top: 15px;
     right: 20px;
     padding: 10px 20px;
-    background-color: #555555; /* Slightly lighter grey for button */
-    color: white;
+    background-color: white; /* Slightly lighter grey for button */
+    color: black;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-weight: 900 ;
 }
 
 .logout-button:hover {
@@ -54,9 +58,9 @@ body {
     border: none;
     color: #FFFFFF; /* White color for burger menu icon */
     margin: 10px;
-    position: absolute;
-    top: 10px;
-    left: 10px;
+    position: fixed;
+    top: 5px;
+    left: 5px;
     z-index: 2000; /* On top */
     transition: color 0.3s ease;
 }
@@ -66,11 +70,11 @@ body {
 }
 
 /* Sidebar */
-.sidebar {
-    background-color: #F0F0F0; /* Light grey background for sidebar */
-    color: #333333; /* Dark grey text for sidebar items */
+.main-sidebar {
+    background-color: black; /* Light grey background for sidebar */
+    color: #F0F0F0; /* Dark grey text for sidebar items */
     padding: 20px;
-    width: 250px; /* Sidebar width */
+    width: 150px; /* Sidebar width */
     position: fixed;
     height: 100%;
     left: 0;
@@ -79,34 +83,38 @@ body {
     z-index: 1000; /* Sidebar level */
     transition: transform 0.3s ease; /* Smooth opening */
     transform: translateX(0); /* Visible state */
+    padding-top: 57px;
+
 }
 
-.sidebar-closed {
+.main-sidebar-closed {
     transform: translateX(-100%); /* Hidden state */
 }
 
 /* Content */
-.content {
-    margin-left: 250px; /* Adjust for sidebar width */
+.main-content {
+    font-family: 'Alasassy Caps Regular',sans-serif;
+    font-weight: bold;
     padding: 20px;
     background-color: #FFFFFF; /* White background for content area */
     min-height: 100vh;
-    color: #333333; /* Dark grey text for content */
+    color: black; /* Dark grey text for content */
     transition: filter 0.3s ease;
     text-align: center;
 }
 
 /* Blur Effect */
-.blur-background .content {
+.blur-background .main-content {
     filter: blur(5px);
 }
 
 /* Footer */
-.footer {
-    background-color: #333; /* Dark grey background */
+.main-footer {
+    background-color: black; /* Dark grey background */
     color: white; /* White text */
     padding: 10px;
     text-align: center;
     width: 100%;
-    position: relative; /* This keeps it in flow until scrolling to the bottom */
+    position: relative; 
+    box-sizing: border-box;
 }

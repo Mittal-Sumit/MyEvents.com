@@ -4,9 +4,9 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from './components/Login';
 import Register from './components/Register';
 import Home from './components/Home';
-import ResetPassword from './components/ResetPassword'; // Ensure correct path and component import
-import ResetPasswordConfirm from './components/ResetPasswordConfirm'; // Ensure correct path and component import
-import './App.css';
+import AdminDashboard from './components/AdminDashboard';
+import ResetPassword from './components/ResetPassword';
+import ResetPasswordConfirm from './components/ResetPasswordConfirm';
 
 const App = () => {
     return (
@@ -16,8 +16,9 @@ const App = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/home" element={<Home />} />
-                <Route path="/reset-password" element={<ResetPassword />} /> {/* Check this path */}
-                <Route path="/reset-password-confirm/:uid/:token" element={<ResetPasswordConfirm />} /> {/* Check this path */}
+                <Route path="/admin-dashboard" element={<AdminDashboard />} /> {/* Admin route */}
+                <Route path="/reset-password" element={<ResetPassword />} />
+                <Route path="/reset-password-confirm/:uid/:token" element={<ResetPasswordConfirm />} />
             </Routes>
         </Router>
     );

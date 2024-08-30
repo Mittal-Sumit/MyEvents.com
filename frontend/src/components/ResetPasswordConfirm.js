@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Typography } from '@mui/material';
-import './AuthStyles.css'; // Ensure you're using the AuthStyles.css file
+import './AuthStyles.css'; 
 
 const ResetPasswordConfirm = () => {
-    const { uid, token } = useParams(); // Get UID and token from URL
+    const { uid, token } = useParams(); 
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
     const navigate = useNavigate();

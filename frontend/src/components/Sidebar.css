@@ -1,44 +1,57 @@
-/* frontend/src/components/Sidebar.css */
+/* src/components/Sidebar.css */
+
+/* Burger Menu Button */
 .burger-menu {
     font-size: 24px;
     cursor: pointer;
     background: none;
     border: none;
-    color: #333; /* Changed color to a darker shade for visibility */
+    color: #333; 
     margin: 10px;
     position: fixed;
     top: 10px;
     left: 10px;
-    z-index: 1000; /* Ensures the button is always on top */
+    z-index: 1000; 
 }
 
-.sidebar {
+/* Main Sidebar */
+.main-sidebar {
     width: 200px;
     height: 100%;
     position: fixed;
-    left: -200px; /* Hide the sidebar initially */
     top: 0;
+    left: 0;
     background-color: #f4f4f4;
-    overflow-x: hidden;
-    transition: all 0.3s ease;
+    overflow: hidden; 
+    transition: transform 0.3s ease; 
+    transform: translateX(-100%); 
+    padding-top: 50px; /* Adjust space for burger menu button */
 }
 
-.sidebar.open {
-    left: 0; /* Show the sidebar when open */
+.main-sidebar.open {
+    transform: translateX(0); 
 }
 
-.sidebar-nav ul {
-    list-style-type: none !important; /* Remove bullets and force this style */
-    padding: 0 !important; /* Ensure no padding */
-    margin: 0 !important; /* Ensure no margin */
+/* Sidebar Navigation */
+.sidebar-nav {
+    padding: 0; 
+    margin: 0; 
 }
 
-.sidebar-nav li {
+.sidebar-list {
+    list-style-type: none; /* Remove default list bullets */
+    padding: 0; 
+    margin: 0; 
+}
+
+/* Sidebar Item */
+.sidebar-item {
     padding: 10px;
     text-align: center;
     border-bottom: 1px solid #ccc;
+    cursor: pointer;
 }
 
-.sidebar-nav li:hover {
+.sidebar-item:hover {
     background-color: #ddd;
 }

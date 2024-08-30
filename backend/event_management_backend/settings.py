@@ -57,12 +57,15 @@ MIDDLEWARE = [
     
 ]
 
-# REST Framework Configuration
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
+    'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
 }
+
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
@@ -156,17 +159,15 @@ SIMPLE_JWT = {
 
 
 
-# settings.py
-
-EMAIL_HOST_PASSWORD = os.environ.get('adpe fidx bjqf zrhs')  # Use environment variable
+  
 
 
-# backend/settings.py
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'  # Replace with your SMTP server
-EMAIL_PORT = 587  # Usually 587 for TLS, 465 for SSL
-EMAIL_USE_TLS = True  # Set to True if using TLS
-EMAIL_HOST_USER = 'proryder500@gmail.com'  # Your email address
-EMAIL_HOST_PASSWORD = 'adpe fidx bjqf zrhs'  # Your email password
-DEFAULT_FROM_EMAIL = 'proryder500@gmail.com'  # Default from email
+EMAIL_HOST = 'smtp.gmail.com'  
+EMAIL_PORT = 587  
+EMAIL_USE_TLS = True  
+EMAIL_HOST_USER = 'proryder500@gmail.com'  
+EMAIL_HOST_PASSWORD = 'adpe fidx bjqf zrhs'   
+DEFAULT_FROM_EMAIL = 'proryder500@gmail.com'  

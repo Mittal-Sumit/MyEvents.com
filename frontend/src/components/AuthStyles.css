@@ -1,7 +1,7 @@
 /* src/components/AuthStyles.css */
 
 /* General Body Styling */
-body {
+html,body {
     background: #DCDDDF url(https://cssdeck.com/uploads/media/items/7/7AF2Qzt.png);
     color: #000;
     font: 14px Arial, sans-serif;
@@ -14,25 +14,24 @@ body {
 
 /* Container Styling for Auth Pages */
 .auth-container {
-    background: rgb(225, 225, 225); /* Very light yellow background */
+    background: rgb(225, 225, 225); 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border: 1px solid #c4c6ca;
-    margin: 80px auto;
+    margin: 100px auto;
     padding: 30px;
     text-align: center;
-    width: 450px; /* Increased width */
+    width: 450px; 
     border-radius: 12px;
     position: relative;
     animation: fadeIn 1s ease-in-out;
 }
 
-/* Animation */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
 }
 
-/* Headings */
+
 .auth-container h5 {
     color: #4A4A4A;
     font: bold 26px Helvetica, Arial, sans-serif;
@@ -40,7 +39,7 @@ body {
     margin: 20px 0 30px;
 }
 
-/* Form Inputs */
+
 .auth-input {
     border-radius: 5px;
     box-shadow: 0 1px 0 #fff, 0 -2px 5px rgba(0, 0, 0, 0.08) inset;

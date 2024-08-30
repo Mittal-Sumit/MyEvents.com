@@ -83,9 +83,10 @@ const Home = () => {
                 />
             </div>
 
-            <div className="main-content" ref={contentRef}> {/* Content reference */}
-                <h1>Welcome to MyEvent</h1>
-                <p>This is the main page content.</p>
+            <div className="main-content" id = "main-content" ref={contentRef}> {/* Content reference */}
+                <h1>EVENTS</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel risus quis enim aliquet euismod sit amet ac felis. Curabitur vehicula vehicula lorem ac elementum. Donec at sodales lorem. Proin sed ligula vestibulum, finibus ex non, fringilla nisl. In hac habitasse platea dictumst. Sed eget magna mi. Phasellus vitae libero venenatis, cursus purus in, interdum ligula. Etiam feugiat est eu erat laoreet, et egestas lectus vulputate. Nullam malesuada massa et mauris volutpat, a varius nunc pharetra. Mauris consectetur facilisis tincidunt. Nulla facilisi. Cras lacinia magna non dui cursus, vel convallis lorem iaculis.</p>
+                <p>Vivamus a est a nisi ultricies facilisis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In hac habitasse platea dictumst. Integer nec magna sem. Nam vel egestas eros. Vestibulum pretium luctus tincidunt. Nullam nec lorem sem. Duis auctor, erat id egestas facilisis, orci nisi hendrerit metus, vel ultricies nulla orci et magna. Aenean facilisis convallis ipsum, sed vulputate est fermentum non.</p>
             </div>
 
             <div ref={footerRef}> {/* Footer reference */}

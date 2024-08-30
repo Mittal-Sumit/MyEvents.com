@@ -11,6 +11,7 @@ from rest_framework import generics, status, permissions
 from .serializers import UserSerializer, PasswordResetSerializer
 from rest_framework.permissions import IsAdminUser
 from .models import CustomUser
+from rest_framework.authtoken.models import Token
 
 User = get_user_model()
 
@@ -26,11 +27,19 @@ class LoginView(APIView):
         username = request.data.get('username')
         password = request.data.get('password')
         user = authenticate(request, username=username, password=password)
-        if user is not None and user.is_active:
-            login(request, user)
-            serializer = UserSerializer(user)
-            return Response({'message': 'Login successful'})
-        return Response({'error': 'Invalid credentials'}, status=400)
+        if user is not None:
+            token, created = Token.objects.get_or_create(user=user)
+            # Include user role in the response
+            return Response({
+                'message': 'Login successful',
+                'user': {
+                    'username': user.username,
+                    'role': user.role  # Ensure 'role' is a field on your user model
+                },
+                'token': token.key
+            }, status=status.HTTP_200_OK)
+        else:
+            return Response({'message': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
 class ResetPasswordView(APIView):
     permission_classes = [AllowAny]

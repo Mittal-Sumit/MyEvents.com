@@ -2,12 +2,14 @@
 html,body {
     background-color: #FFFFFF; /* White background for the entire page */
     color: black; /* Dark grey text for general readability */
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
 }
+
+
 
 /* Header Style */
 .main-header {
@@ -93,14 +95,14 @@ html,body {
 
 /* Content */
 .main-content {
-    font-family: 'Alasassy Caps Regular',sans-serif;
-    font-weight: bold;
+    font-family: 'Raleway', sans-serif;
     padding: 20px;
     background-color: #FFFFFF; /* White background for content area */
     min-height: 100vh;
     color: black; /* Dark grey text for content */
     transition: filter 0.3s ease;
     text-align: center;
+    font-size: x-large;
 }
 
 /* Blur Effect */

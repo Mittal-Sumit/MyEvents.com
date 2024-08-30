@@ -8,3 +8,23 @@
     width: 100%;
     bottom: 0;
 }
+
+.main-footer {
+    background-color: #333; /* Dark grey background */
+    color: white; /* White text */
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    position: relative; /* This keeps it in flow until scrolling to the bottom */
+    font-family: 'Roboto', sans-serif; /* Use the font suggested for consistency */
+}
+
+.footer-contact-info {
+    margin-top: 10px;
+    font-size: 14px; /* Smaller font for contact info */
+    line-height: 1.5; /* Better spacing */
+}
+
+.footer-contact-info p {
+    margin: 5px 0; /* Space out each line */
+}

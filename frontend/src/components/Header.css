@@ -1,11 +1,11 @@
-/* frontend/src/components/Header.css */
 /* src/components/Header.css */
-
 .header {
     background-color: #333; /* Dark grey background */
     color: white; /* White text */
-    padding: 20px;
+    padding: 10px;
     text-align: center;
-    font-size: 24px;
+    font-size: 10px;
     font-weight: bold;
+    font-family: 'Arial', sans-serif; /* Font style for the header */
+    margin-bottom: 20px; /* Space below the header */
 }

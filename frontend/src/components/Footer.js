@@ -1,10 +1,9 @@
-// src/components/Footer.js
 import React from 'react';
 import './Footer.css';
 
 const Footer = () => {
     return (
-        <footer className="main-footer">  {/* Updated to match Footer.css */}
+        <footer className="main-footer">  
             <p>&copy; 2024 MyEvent.com</p>
             <div className="footer-contact-info">
                 <p>Email: contact@myevent.com</p>

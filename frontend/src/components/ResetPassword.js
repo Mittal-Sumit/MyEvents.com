@@ -1,10 +1,10 @@
-// src/components/ResetPassword.js
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Tooltip, Typography } from '@mui/material';
-import { toast } from 'react-toastify'; // Import toast from react-toastify
-import Header from './Header'; // Import the Header component
+import { toast } from 'react-toastify'; 
+import Header from './Header'; 
 import './AuthStyles.css'; 
 
 const ResetPassword = () => {
@@ -15,9 +15,9 @@ const ResetPassword = () => {
         e.preventDefault();
         try {
             const response = await axios.post('http://localhost:8000/api/users/reset_password/', { email });
-            toast.success(response.data.message); // Show success message using toaster
+            toast.success(response.data.message); 
         } catch (error) {
-            toast.error("User doesn't exist"); // Show error message using toaster
+            toast.error("User doesn't exist"); 
             console.error('Reset error:', error.response);
         }
     };
@@ -28,7 +28,7 @@ const ResetPassword = () => {
 
     return (
         <div className="auth-container">
-            <Header /> {/* Include the Header component */}
+            <Header /> 
             <Typography variant="h5" gutterBottom>
                 Reset Password
             </Typography>

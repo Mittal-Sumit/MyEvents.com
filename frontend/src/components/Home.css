@@ -1,7 +1,7 @@
 
 html,body {
-    background-color: #FFFFFF; /* White background for the entire page */
-    color: black; /* Dark grey text for general readability */
+    background-color: #FFFFFF; 
+    color: black; 
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
@@ -16,8 +16,8 @@ html,body {
     background-image: url(C:\Users\susha\OneDrive\Desktop\MyEvent.com\frontend\public\concert.jpg);
     background-size: cover;
     background-position: center; 
-    height: 100vh; /* 75% of the viewport height */
-    color: transparent; /* Hide any text color */
+    height: 100vh; 
+    color: transparent; 
     position: relative;
     display: flex;
     align-items: center;
@@ -29,7 +29,7 @@ html,body {
 
 /* Header Text */
 .main-header h1 {
-    color: #FFFFFF; /* White color for header text */
+    color: #FFFFFF; 
     margin: 0;
 }
 
@@ -39,7 +39,7 @@ html,body {
     top: 15px;
     right: 20px;
     padding: 10px 20px;
-    background-color: white; /* Slightly lighter grey for button */
+    background-color: white; 
     color: black;
     border: none;
     border-radius: 4px;
@@ -49,7 +49,7 @@ html,body {
 }
 
 .logout-button:hover {
-    background-color: #444444; /* Even darker grey on hover */
+    background-color: #444444; 
 }
 
 /* Burger Menu Button */
@@ -58,62 +58,61 @@ html,body {
     cursor: pointer;
     background: none;
     border: none;
-    color: #FFFFFF; /* White color for burger menu icon */
+    color: #FFFFFF; 
     margin: 10px;
     position: fixed;
     top: 5px;
     left: 5px;
-    z-index: 2000; /* On top */
+    z-index: 2000; 
     transition: color 0.3s ease;
 }
 
 .burger-menu.highlight {
-    color: #CCCCCC; /* Light grey when highlighted */
+    color: #CCCCCC; 
 }
 
 /* Sidebar */
 .main-sidebar {
-    background-color: black; /* Light grey background for sidebar */
-    color: #F0F0F0; /* Dark grey text for sidebar items */
+    background-color: black; 
+    color: #F0F0F0; 
     padding: 20px;
-    width: 150px; /* Sidebar width */
+    width: 150px; 
     position: fixed;
     height: 100%;
     left: 0;
     top: 0;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    z-index: 1000; /* Sidebar level */
-    transition: transform 0.3s ease; /* Smooth opening */
-    transform: translateX(0); /* Visible state */
+    z-index: 1000; 
+    transition: transform 0.3s ease; 
+    transform: translateX(0); 
     padding-top: 57px;
 
 }
 
 .main-sidebar-closed {
-    transform: translateX(-100%); /* Hidden state */
+    transform: translateX(-100%); 
 }
 
 /* Content */
 .main-content {
     font-family: 'Raleway', sans-serif;
     padding: 20px;
-    background-color: #FFFFFF; /* White background for content area */
+    background-color: #FFFFFF; 
     min-height: 100vh;
-    color: black; /* Dark grey text for content */
+    color: black; 
     transition: filter 0.3s ease;
     text-align: center;
     font-size: x-large;
 }
 
-/* Blur Effect */
 .blur-background .main-content {
     filter: blur(5px);
 }
 
 /* Footer */
 .main-footer {
-    background-color: black; /* Dark grey background */
-    color: white; /* White text */
+    background-color: black; 
+    color: white; 
     padding: 10px;
     text-align: center;
     width: 100%;

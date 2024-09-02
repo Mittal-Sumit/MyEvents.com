@@ -55,7 +55,7 @@ class ResetPasswordView(APIView):
             send_mail(
                 'Password Reset Request',
                 f'Click the link below to reset your password:\n{reset_url}',
-                'from@example.com',  # Replace with your configured email address
+                'proryder500@gmail.com',  # Replace with your configured email address
                 [email],
                 fail_silently=False,
             )
@@ -81,5 +81,10 @@ class ResetPasswordConfirmView(APIView):
 class UpdateUserRoleView(generics.UpdateAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAdminUser]  # Only admins can update roles
     lookup_field = 'id'
+
+class UserListView(generics.ListAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAdminUser] 

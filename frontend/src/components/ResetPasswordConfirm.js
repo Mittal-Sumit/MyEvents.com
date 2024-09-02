@@ -1,19 +1,18 @@
-// src/components/ResetPasswordConfirm.js
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Typography,Tooltip } from '@mui/material';
-import PasswordStrengthBar from 'react-password-strength-bar'; // Import Password Strength Bar
-import { toast } from 'react-toastify'; // Import toast from react-toastify
-import Header from './Header'; // Import the Header component
+import PasswordStrengthBar from 'react-password-strength-bar'; 
+import { toast } from 'react-toastify'; 
+import Header from './Header'; 
 import './AuthStyles.css'; 
-import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Icons for show/hide password
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; 
 
 const ResetPasswordConfirm = () => {
     const { uid, token } = useParams(); 
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [passwordScore, setPasswordScore] = useState(0); // State to track password score
+    const [passwordScore, setPasswordScore] = useState(0); 
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const navigate = useNavigate();
@@ -32,7 +31,7 @@ const ResetPasswordConfirm = () => {
             toast.error('Passwords do not match.');
             return;
         }
-        if (passwordScore < 3) { // Check if password is at least 'okay'
+        if (passwordScore < 3) { 
             toast.error('Password is too weak. Please use a stronger password.');
             return;
         }
@@ -55,7 +54,7 @@ const ResetPasswordConfirm = () => {
 
     return (
         <div className="auth-container">
-            <Header /> {/* Include the Header component */}
+            <Header /> 
             <Typography variant="h5" gutterBottom>
                 Change Password
             </Typography>
@@ -74,11 +73,11 @@ const ResetPasswordConfirm = () => {
                         {showPassword ? <FaEyeSlash /> : <FaEye />}
                     </span>
                 </div>
-                {/* Password Strength Bar with onChangeScore callback */}
+                
                 <PasswordStrengthBar
                     className='password-strength-container'
                     password={password}
-                    onChangeScore={(score) => setPasswordScore(score)} // Set password score
+                    onChangeScore={(score) => setPasswordScore(score)} 
                 />
 
                 <div className="password-field">

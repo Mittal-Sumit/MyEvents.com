@@ -1,6 +1,6 @@
-/* frontend/src/components/Footer.css */
+
 .footer {
-    background-color: #808080; /* Set background color to a greyish shade */
+    background-color: #808080; 
     color: white;
     padding: 10px;
     text-align: center;
@@ -10,21 +10,21 @@
 }
 
 .main-footer {
-    background-color: #333; /* Dark grey background */
-    color: white; /* White text */
+    background-color: #333; 
+    color: white; 
     padding: 20px;
     text-align: center;
     width: 100%;
-    position: relative; /* This keeps it in flow until scrolling to the bottom */
-    font-family: 'Roboto', sans-serif; /* Use the font suggested for consistency */
+    position: relative; 
+    font-family: 'Roboto', sans-serif; 
 }
 
 .footer-contact-info {
     margin-top: 10px;
-    font-size: 14px; /* Smaller font for contact info */
-    line-height: 1.5; /* Better spacing */
+    font-size: 14px; 
+    line-height: 1.5; 
 }
 
 .footer-contact-info p {
-    margin: 5px 0; /* Space out each line */
+    margin: 5px 0; 
 }

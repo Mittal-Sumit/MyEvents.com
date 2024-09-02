@@ -1,16 +1,19 @@
-// src/components/AdminDashboard.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Sidebar from './Sidebar'; // Reuse the existing Sidebar component
-import Footer from './Footer';   // Reuse the existing Footer component
-import './AdminDashboard.css';   // Create a new CSS file for styling
+import Sidebar from './Sidebar'; 
+import Footer from './Footer';   
+import './AdminDashboard.css';   
 
 const AdminDashboard = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const navigate = useNavigate();
 
+    const goToUserManagement = () => {
+        navigate('/user-management'); 
+    };
+
     const handleLogout = () => {
-        navigate('/login');  // Navigate to login page on logout
+        navigate('/login');  
     };
 
     const toggleSidebar = () => {
@@ -33,7 +36,6 @@ const AdminDashboard = () => {
             document.removeEventListener('click', handleClickOutside);
         }
 
-        // Cleanup the event listener on component unmount
         return () => {
             document.removeEventListener('click', handleClickOutside);
         };
@@ -59,23 +61,22 @@ const AdminDashboard = () => {
                 <h2>Welcome, Admin</h2>
                 <p>Here you can manage events, view user statistics, and more.</p>
 
-                {/* Example sections for admin tasks */}
                 <div className="dashboard-section">
                     <h3>Manage Events</h3>
                     <p>View, edit, or delete events.</p>
-                    <button className="admin-button">Go to Events</button>
+                    <button className="admin-button" onClick={() => navigate('/events')}>Go to Events</button>
                 </div>
 
                 <div className="dashboard-section">
                     <h3>User Management</h3>
                     <p>View user profiles, assign roles, and manage accounts.</p>
-                    <button className="admin-button">Manage Users</button>
+                    <button className="admin-button" onClick={goToUserManagement}>Manage Users</button>
                 </div>
 
                 <div className="dashboard-section">
                     <h3>Reports</h3>
                     <p>Generate and view reports.</p>
-                    <button className="admin-button">View Reports</button>
+                    <button className="admin-button" onClick={() => navigate('/reports')}>View Reports</button>
                 </div>
             </div>
 

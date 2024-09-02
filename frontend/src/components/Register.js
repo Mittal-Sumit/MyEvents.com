@@ -1,8 +1,8 @@
-// src/components/Register.js
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Typography, Tooltip } from '@mui/material'; // Import Tooltip from MUI
+import { Typography, Tooltip } from '@mui/material'; 
 import PasswordStrengthBar from 'react-password-strength-bar';
 import { toast } from 'react-toastify';
 import Header from './Header';

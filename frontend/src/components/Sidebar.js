@@ -1,4 +1,4 @@
-// src/components/Sidebar.js
+
 import React, { useState, useEffect, useRef } from 'react';
 import './Sidebar.css';
 
@@ -16,7 +16,7 @@ const Sidebar = ({ scrollToHeader, scrollToContent, scrollToFooter }) => {
             sidebarRef.current && !sidebarRef.current.contains(event.target) &&
             burgerRef.current && !burgerRef.current.contains(event.target)
         ) {
-            setIsOpen(false); // Close the sidebar if clicked outside
+            setIsOpen(false); 
         }
     };
 

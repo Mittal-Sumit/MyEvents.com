@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { Typography, Tooltip } from '@mui/material'; 
-import PasswordStrengthBar from 'react-password-strength-bar';
+import { useNavigate, Link } from 'react-router-dom';
+import { Typography } from '@mui/material';
 import { toast } from 'react-toastify';
 import Header from './Header';
+import TextInput from './Login/TextInput'; 
+import PasswordStrengthInput from './Register/PasswordStrengthInput'; 
+import ConfirmPasswordInput from './Register/ConfirmPasswordInput'; 
+import { handleRegistration } from '../utils/authReg'; 
 import './AuthStyles.css'; 
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Register = () => {
     const [username, setUsername] = useState('');
@@ -19,54 +20,24 @@ const Register = () => {
     const navigate = useNavigate();
 
     const togglePasswordVisibility = () => {
-        setShowPassword(prevState => !prevState);
+        setShowPassword((prev) => !prev);
     };
 
     const toggleConfirmPasswordVisibility = () => {
-        setShowConfirmPassword(prevState => !prevState);
+        setShowConfirmPassword((prev) => !prev);
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         if (password !== confirmPassword) {
             toast.error('Passwords do not match.');
             return;
         }
-        if (passwordScore < 3) { // Minimum requirement: password must be 'good'
+        if (passwordScore < 3) {
             toast.error('Password is too weak. Please use a stronger password.');
             return;
         }
-        try {
-            const response = await axios.post('http://localhost:8000/api/users/register/', {
-                username,
-                email,
-                password,
-            });
-
-            const { access, refresh } = response.data;
-            localStorage.setItem('accessToken', access); 
-            localStorage.setItem('refreshToken', refresh); 
-            toast.success('Registration successful! You are now logged in.');
-            navigate('/home'); 
-
-        } catch (error) {
-            if (error.response && error.response.data) {
-                const errorData = error.response.data;
-                if (errorData.username) {
-                    toast.error('Username already exists. Please choose a different one.');
-                } else if (errorData.email) {
-                    toast.error('Email already exists. Please choose a different one.');
-                } else {
-                    toast.error('There was an error registering the user.');
-                }
-            } else {
-                toast.error('There was an error registering the user.');
-            }
-        }
-    };
-
-    const handleBackToLogin = () => {
-        navigate('/login');
+        handleRegistration(username, email, password, navigate);
     };
 
     return (
@@ -76,63 +47,40 @@ const Register = () => {
                 Register
             </Typography>
             <form onSubmit={handleSubmit}>
-                <Tooltip title="Enter a unique username" placement="left">
-                    <input
-                        className="auth-input"
-                        type="text"
-                        placeholder="Username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                </Tooltip>
-                <Tooltip title="Enter a valid email address" placement="left">
-                    <input
-                        className="auth-input"
-                        type="email"
-                        placeholder="Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </Tooltip>
-                <div className="password-field">
-                    <Tooltip title="Password strength should be good or above" placement="left">
-                        <input
-                            className="auth-input"
-                            type={showPassword ? 'text' : 'password'}
-                            placeholder="Password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </Tooltip>
-                    <span className="toggle-password" onClick={togglePasswordVisibility}>
-                        {showPassword ? <FaEyeSlash /> : <FaEye />}
-                    </span>
-                </div>
-                <PasswordStrengthBar 
-                    className='password-strength-container' 
-                    password={password} 
-                    onChangeScore={(score) => setPasswordScore(score)} 
+                <TextInput
+                    label="Enter a unique username"
+                    type="text"
+                    placeholder="Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                 />
-
-                <div className="password-field">
-                    <Tooltip title="Re-enter the password to confirm" placement="left">
-                        <input
-                            className="auth-input"
-                            type={showConfirmPassword ? 'text' : 'password'}
-                            placeholder="Confirm Password"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                        />
-                    </Tooltip>
-                    <span className="toggle-password" onClick={toggleConfirmPasswordVisibility}>
-                        {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
-                    </span>
-                </div>
+                <TextInput
+                    label="Enter a valid email address"
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <PasswordStrengthInput
+                    password={password}
+                    setPassword={setPassword}
+                    showPassword={showPassword}
+                    togglePasswordVisibility={togglePasswordVisibility}
+                    setPasswordScore={setPasswordScore}
+                    label="Password strength should be good or above"
+                />
+                <ConfirmPasswordInput
+                    confirmPassword={confirmPassword}
+                    setConfirmPassword={setConfirmPassword}
+                    showConfirmPassword={showConfirmPassword}
+                    toggleConfirmPasswordVisibility={toggleConfirmPasswordVisibility}
+                    label="Re-enter the password to confirm"
+                />
                 <input type="submit" className="auth-button" value="Register" />
             </form>
-            <button className="auth-link-button" onClick={handleBackToLogin}>
+            <Link to="/login" className="auth-link">
                 Back to Login
-            </button>
+            </Link>
         </div>
     );
 };

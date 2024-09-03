@@ -1,0 +1,90 @@
+/* src/components/EventManagement.css */
+
+.event-management-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.event-form {
+    margin-bottom: 20px;
+}
+
+.event-form input,
+.event-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.event-form button {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.event-form button:hover {
+    background-color: #45a049;
+}
+
+.event-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.event-list li {
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.event-title {
+    cursor: pointer;
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.event-details {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+}
+
+.event-list button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.event-list button:hover {
+    background-color: #c62828;
+}
+
+.back-to-admin-button {
+    padding: 10px 15px;
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.back-to-admin-button:hover {
+    background-color: #007B9E;
+}

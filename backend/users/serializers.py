@@ -1,6 +1,7 @@
 # backend/users/serializers.py
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 User = get_user_model()
 
@@ -32,3 +33,11 @@ class PasswordResetSerializer(serializers.Serializer):
             raise serializers.ValidationError("No user with this email address exists.")
         return value
 
+# Custom serializer to include the user's role in the JWT token
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        # Add custom claims, such as the user's role
+        token['role'] = user.role
+        return token

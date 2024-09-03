@@ -3,9 +3,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
-import Header from './Header'; // Assuming you have a Header component
-import ReactJoyride from 'react-joyride'; // Import React Joyride
-import { joyrideSteps } from './joyrideSteps'; // Import the steps for Joyride
+import ReactJoyride from 'react-joyride'; 
+import { joyrideSteps } from './joyrideSteps'; 
 import './Home.css';
 
 const Home = () => {
@@ -19,8 +18,11 @@ const Home = () => {
     const footerRef = useRef(null);
 
     const handleLogout = () => {
+        sessionStorage.removeItem('accessToken');
+        sessionStorage.removeItem('refreshToken');
         navigate('/login');
     };
+    
 
     const toggleSidebar = () => {
         setIsSidebarOpen(prevState => !prevState);
@@ -72,6 +74,19 @@ const Home = () => {
             footerRef.current.scrollIntoView({ behavior: 'smooth' });
         }
     };
+    useEffect(() => {
+        // Clear tokens on browser tab close
+        const handleTabClose = () => {
+            sessionStorage.removeItem('accessToken');
+            sessionStorage.removeItem('refreshToken');
+        };
+
+        window.addEventListener('beforeunload', handleTabClose);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleTabClose);
+        };
+    }, []);
 
     return (
         <div className={`home-page ${isSidebarOpen ? 'blur-background' : ''}`}>

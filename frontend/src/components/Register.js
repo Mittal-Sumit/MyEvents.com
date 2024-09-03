@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -38,13 +37,18 @@ const Register = () => {
             return;
         }
         try {
-            await axios.post('http://localhost:8000/api/users/register/', {
+            const response = await axios.post('http://localhost:8000/api/users/register/', {
                 username,
                 email,
                 password,
             });
-            toast.success('Registration successful! Please log in.');
-            navigate('/login');
+
+            const { access, refresh } = response.data;
+            localStorage.setItem('accessToken', access); 
+            localStorage.setItem('refreshToken', refresh); 
+            toast.success('Registration successful! You are now logged in.');
+            navigate('/home'); 
+
         } catch (error) {
             if (error.response && error.response.data) {
                 const errorData = error.response.data;

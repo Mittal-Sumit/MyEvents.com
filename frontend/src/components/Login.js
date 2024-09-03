@@ -1,48 +1,53 @@
-// src/components/Login.js
 import React, { useState } from 'react';
-import axios from 'axios';
+import axiosInstance from '../utils/axiosInstance'; 
 import { useNavigate, Link } from 'react-router-dom';
 import { Tooltip, Typography } from '@mui/material';
-import { toast } from 'react-toastify'; 
-import Header from './Header'; 
-import { FaEye, FaEyeSlash } from 'react-icons/fa'; 
-import './AuthStyles.css'; 
+import { toast } from 'react-toastify';
+import Header from './Header';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import './AuthStyles.css';
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [showPassword, setShowPassword] = useState(false); 
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
     const togglePasswordVisibility = () => {
-        setShowPassword(prevState => !prevState); 
+        setShowPassword(prevState => !prevState);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/api/users/login/', {
+            const response = await axiosInstance.post('users/login/', {
                 username,
                 password,
             });
 
-            const userRole = response.data.user.role; 
-            toast.success('Login successful!'); 
-            
+            const { access, refresh } = response.data;
+            const tokenPayload = JSON.parse(atob(access.split('.')[1])); 
+            const userRole = tokenPayload.role; 
+
+            sessionStorage.setItem('accessToken', access); // Store in sessionStorage
+            sessionStorage.setItem('refreshToken', refresh); // Store in sessionStorage
+            toast.success('Login successful!');
+
+            // Redirect based on user role
             if (userRole === 'admin') {
-                navigate('/admin-dashboard'); 
+                navigate('/admin-dashboard');
             } else {
-                navigate('/home'); 
+                navigate('/home');
             }
         } catch (error) {
-            toast.error('Invalid credentials, please try again.'); 
+            toast.error('Invalid credentials, please try again.');
             console.error('Error:', error);
         }
     };
 
     return (
         <div className="auth-container">
-            <Header /> 
+            <Header />
             <Typography variant="h5" gutterBottom>
                 Login
             </Typography>
@@ -66,9 +71,13 @@ const Login = () => {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </Tooltip>
-                    <span className="toggle-login-password" onClick={togglePasswordVisibility}>
-                        {showPassword ? <FaEyeSlash /> : <FaEye />}
-                    </span>
+                    <span 
+                        className="toggle-login-password"
+                        onClick={togglePasswordVisibility}
+                        type="button"
+                        aria-label='Toggle Password Visibility'
+                        >{showPassword ? <FaEyeSlash/> : <FaEye />}
+                        </span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '10px' }}>
                     <input type="submit" className="auth-button" value="Login" />

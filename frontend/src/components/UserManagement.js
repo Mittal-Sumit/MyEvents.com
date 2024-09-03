@@ -1,7 +1,7 @@
-// src/components/UserManagement.js
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from '../utils/axiosInstance'; // Use the configured Axios instance
 import { toast } from 'react-toastify';
+import './UserManagement.css'; // Ensure you have a CSS file for styling
 
 const UserManagement = () => {
     const [users, setUsers] = useState([]);
@@ -13,7 +13,7 @@ const UserManagement = () => {
 
     const fetchUsers = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/api/users/');
+            const response = await axiosInstance.get('http://localhost:8000/api/users/');
             setUsers(response.data);
             setLoading(false);
         } catch (error) {
@@ -21,13 +21,13 @@ const UserManagement = () => {
         }
     };
 
-    const updateRole = async (userId, newRole) => {
+    const updateUserRole = async (userId, newRole) => {
         try {
-            await axios.put(`http://localhost:8000/api/users/update-role/${userId}/`, {
+            await axiosInstance.patch(`http://localhost:8000/api/users/update-role/${userId}/`, {
                 role: newRole,
             });
             toast.success('User role updated successfully');
-            fetchUsers(); // Refresh user list
+            fetchUsers(); // Refresh the user list
         } catch (error) {
             toast.error('Error updating user role');
         }
@@ -36,7 +36,7 @@ const UserManagement = () => {
     if (loading) return <p>Loading...</p>;
 
     return (
-        <div>
+        <div className="user-management-container">
             <h2>User Management</h2>
             <table>
                 <thead>
@@ -55,9 +55,9 @@ const UserManagement = () => {
                             <td>{user.role}</td>
                             <td>
                                 {user.role === 'user' ? (
-                                    <button onClick={() => updateRole(user.id, 'admin')}>Make Admin</button>
+                                    <button onClick={() => updateUserRole(user.id, 'admin')}>Make Admin</button>
                                 ) : (
-                                    <button onClick={() => updateRole(user.id, 'user')}>Revoke Admin</button>
+                                    <button onClick={() => updateUserRole(user.id, 'user')}>Revoke Admin</button>
                                 )}
                             </td>
                         </tr>

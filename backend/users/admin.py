@@ -10,19 +10,18 @@ class CustomUserAdmin(BaseUserAdmin):
     search_fields = ('username', 'email')
     ordering = ('email',)
 
-    # Add the 'role' field to the add/edit user form in the admin
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         ('Personal info', {'fields': ('first_name', 'last_name', 'email')}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         ('Important dates', {'fields': ('last_login', 'date_joined')}),
-        ('Role Information', {'fields': ('role',)}),  # Add this line
+        ('Role Information', {'fields': ('role',)}),  
     )
 
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'password1', 'password2', 'email', 'first_name', 'last_name', 'role'),  # Add 'role' here
+            'fields': ('username', 'password1', 'password2', 'email', 'first_name', 'last_name', 'role'),  
         }),
     )
 

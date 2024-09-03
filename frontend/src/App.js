@@ -8,11 +8,11 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Home from './components/Home';
 import AdminDashboard from './components/AdminDashboard'; 
-import EventManagement from './components/EventManagement'; // Import EventManagement component
+import EventManagement from './components/EventManagement'; 
 import ResetPassword from './components/ResetPassword';
 import ResetPasswordConfirm from './components/ResetPasswordConfirm';
 import UserManagement from './components/UserManagement';
-import ProtectedRoute from './components/ProtectedRoute'; // Import the ProtectedRoute component
+import ProtectedRoute from './components/ProtectedRoute'; 
 import './App.css';
 
 const App = () => {

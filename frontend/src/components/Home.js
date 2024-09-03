@@ -75,7 +75,7 @@ const Home = () => {
         }
     };
     useEffect(() => {
-        // Clear tokens on browser tab close
+        
         const handleTabClose = () => {
             sessionStorage.removeItem('accessToken');
             sessionStorage.removeItem('refreshToken');

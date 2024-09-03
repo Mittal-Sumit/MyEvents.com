@@ -18,7 +18,7 @@
     font-weight: bold;
 }
 .logout-button {
-    position: absolute;
+    position: fixed;
     top: 15px;
     right: 20px;
     padding: 10px 20px;

@@ -1,0 +1,64 @@
+/* src/components/EventList.css */
+
+.event-list-page {
+    background-color: #f0f0f0; /* Light grey background for consistency */
+    padding: 40px 20px; /* Padding around the entire page */
+    min-height: 100vh; /* Ensures the page fills the viewport height */
+    box-sizing: border-box; /* Ensures padding does not add to the element's width */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Roboto', sans-serif; /* Consistent font across all pages */
+}
+
+.header-container {
+    width: 80%; /* Controls the width of the header area */
+    display: flex;
+    justify-content: space-between; /* Space between title and button */
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #333; /* Dark background for the header */
+    color: white; /* White text for contrast */
+    padding: 10px 20px; /* Padding inside the header */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.page-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #FFFFFF; /* Matches the theme */
+}
+
+.filter-container {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-bar {
+    width: 100%;
+    max-width: 300px;
+    margin-right: 20px;
+}
+
+.date-filter {
+    width: 200px;
+    margin-right: 20px;
+}
+
+.location-filter {
+    width: 200px;
+}
+
+.datagrid-container {
+    width: 80%; /* Consistent width with header */
+    max-height: 60vh; /* Sets maximum height for the DataGrid */
+    overflow: auto; /* Only the DataGrid scrolls */
+    background-color: #FFFFFF; /* White background for the DataGrid */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for DataGrid */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Padding inside DataGrid container */
+}

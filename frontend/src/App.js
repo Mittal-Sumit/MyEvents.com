@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Login from './components/Login';
 import Register from './components/Register';
 import Home from './components/Home';
+import EventList from './components/EventList';
 import AdminDashboard from './components/AdminDashboard'; 
 import EventManagement from './components/EventManagement'; 
 import ResetPassword from './components/ResetPassword';
@@ -26,7 +27,8 @@ const App = () => {
                 <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
                 <Route path="/admin-dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
                 <Route path="/user-management" element={<ProtectedRoute><UserManagement /></ProtectedRoute>} />
-                <Route path="/event-management" element={<ProtectedRoute><EventManagement /></ProtectedRoute>} /> 
+                <Route path="/event-management" element={<ProtectedRoute><EventManagement /></ProtectedRoute>} />
+                <Route path="/event-list" element={<ProtectedRoute><EventList /></ProtectedRoute>} /> 
                 <Route path="/reset-password" element={<ResetPassword />} />
                 <Route path="/reset-password-confirm/:uid/:token" element={<ResetPasswordConfirm />} />
             </Routes>

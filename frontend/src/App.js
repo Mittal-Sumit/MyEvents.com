@@ -26,7 +26,7 @@ const App = () => {
                 <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
                 <Route path="/admin-dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
                 <Route path="/user-management" element={<ProtectedRoute><UserManagement /></ProtectedRoute>} />
-                <Route path="/event-management" element={<ProtectedRoute><EventManagement /></ProtectedRoute>} /> {/* New route */}
+                <Route path="/event-management" element={<ProtectedRoute><EventManagement /></ProtectedRoute>} /> 
                 <Route path="/reset-password" element={<ResetPassword />} />
                 <Route path="/reset-password-confirm/:uid/:token" element={<ResetPasswordConfirm />} />
             </Routes>

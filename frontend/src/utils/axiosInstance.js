@@ -9,7 +9,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
     (config) => {
-        const token = sessionStorage.getItem('accessToken'); // Use sessionStorage
+        const token = sessionStorage.getItem('accessToken'); 
         if (token) {
             config.headers['Authorization'] = `Bearer ${token}`;
         }
@@ -32,10 +32,10 @@ axiosInstance.interceptors.response.use(
             originalRequest._retry = true;
             try {
                 const response = await axiosInstance.post('token/refresh/', {
-                    refresh: sessionStorage.getItem('refreshToken'), // Use sessionStorage
+                    refresh: sessionStorage.getItem('refreshToken'), 
                 });
                 const { access } = response.data;
-                sessionStorage.setItem('accessToken', access); // Use sessionStorage
+                sessionStorage.setItem('accessToken', access); 
                 axios.defaults.headers.common['Authorization'] = `Bearer ${access}`;
                 return axiosInstance(originalRequest);
             } catch (err) {

@@ -10,7 +10,7 @@ export const handleRegistration = async (username, email, password, navigate) =>
         });
 
         const { access, refresh } = response.data;
-        sessionStorage.setItem('accessToken', access); // Use sessionStorage for better security
+        sessionStorage.setItem('accessToken', access); 
         sessionStorage.setItem('refreshToken', refresh);
         toast.success('Registration successful! You are now logged in.');
         navigate('/home');

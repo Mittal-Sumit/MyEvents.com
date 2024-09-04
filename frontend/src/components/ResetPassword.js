@@ -1,10 +1,10 @@
-
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { Tooltip, Typography } from '@mui/material';
+import { useNavigate, Link } from 'react-router-dom';
+import { Typography } from '@mui/material';
 import { toast } from 'react-toastify'; 
 import Header from './Header'; 
+import TextInput from './Login/TextInput'; // Reusing the TextInput component
 import './AuthStyles.css'; 
 
 const ResetPassword = () => {
@@ -33,20 +33,18 @@ const ResetPassword = () => {
                 Reset Password
             </Typography>
             <form onSubmit={handleSubmit}>
-                <Tooltip title='Enter a valid email address' placement='left'>
-                <input
-                    className="auth-input"
+                <TextInput
+                    label="Enter a valid email address"
                     type="email"
                     placeholder="Enter your email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
-                </Tooltip>
                 <input type="submit" className="auth-button" value="Send Reset Link" />
             </form>
-            <button className="auth-link-button" onClick={handleBackToLogin}>
+            <Link to="/login" className="auth-link">
                 Back to Login
-            </button>
+            </Link>
         </div>
     );
 };

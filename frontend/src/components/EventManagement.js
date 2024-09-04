@@ -1,5 +1,3 @@
-// src/components/EventManagement.js
-
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '../utils/axiosInstance';
 import { toast } from 'react-toastify';

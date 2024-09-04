@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Typography,Tooltip } from '@mui/material';
+import { Typography } from '@mui/material';
 import PasswordStrengthBar from 'react-password-strength-bar'; 
 import { toast } from 'react-toastify'; 
 import Header from './Header'; 
+import TextInput from './Login/TextInput'; // Reusing TextInput component
+import PasswordToggle from './Login/PasswordToggle'; // Reusing PasswordToggle component
 import './AuthStyles.css'; 
-import { FaEye, FaEyeSlash } from 'react-icons/fa'; 
 
 const ResetPasswordConfirm = () => {
     const { uid, token } = useParams(); 
@@ -16,14 +17,6 @@ const ResetPasswordConfirm = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const navigate = useNavigate();
-
-    const togglePasswordVisibility = () => {
-        setShowPassword(prevState => !prevState);
-    };
-
-    const toggleConfirmPasswordVisibility = () => {
-        setShowConfirmPassword(prevState => !prevState);
-    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -60,18 +53,17 @@ const ResetPasswordConfirm = () => {
             </Typography>
             <form onSubmit={handleSubmit}>
                 <div className="password-field">
-                <Tooltip title="Password strength should be good or above" placement="left">
-                    <input
-                        className="auth-input"
+                    <TextInput
+                        label="Password strength should be good or above"
                         type={showPassword ? 'text' : 'password'}
                         placeholder="Enter your new password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    </Tooltip>
-                    <span className="toggle-password" onClick={togglePasswordVisibility}>
-                        {showPassword ? <FaEyeSlash /> : <FaEye />}
-                    </span>
+                    <PasswordToggle
+                        showPassword={showPassword}
+                        togglePasswordVisibility={() => setShowPassword(prevState => !prevState)}
+                    />
                 </div>
                 
                 <PasswordStrengthBar
@@ -81,18 +73,17 @@ const ResetPasswordConfirm = () => {
                 />
 
                 <div className="password-field">
-                <Tooltip title="Re-enter the new password to confirm" placement="left">
-                    <input
-                        className="auth-input"
+                    <TextInput
+                        label="Re-enter the new password to confirm"
                         type={showConfirmPassword ? 'text' : 'password'}
                         placeholder="Confirm new password"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     />
-                    </Tooltip>
-                    <span className="toggle-password" onClick={toggleConfirmPasswordVisibility}>
-                        {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
-                    </span>
+                    <PasswordToggle
+                        showPassword={showConfirmPassword}
+                        togglePasswordVisibility={() => setShowConfirmPassword(prevState => !prevState)}
+                    />
                 </div>
                 <input type="submit" className="auth-button" value="Change Password" />
             </form>

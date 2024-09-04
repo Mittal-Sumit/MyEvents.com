@@ -137,7 +137,7 @@ html,body {
 .toggle-login-password {
     position: absolute;
     right: 30px;
-    top: 46%; 
+    top: 42%; 
     transform: translateY(-50%); 
     cursor: pointer;
     font-size: 18px;

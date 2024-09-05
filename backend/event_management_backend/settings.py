@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'users',
     'events',
+    'rsvp',
     'corsheaders',
     'drf_api_logger',
     'django_filters', 

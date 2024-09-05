@@ -1,15 +1,4 @@
-.burger-menu {
-    font-size: 24px;
-    cursor: pointer;
-    background: none;
-    border: none;
-    color: #333; 
-    margin: 10px;
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    z-index: 1000; 
-}
+
 
 /* Main Sidebar */
 .main-sidebar {

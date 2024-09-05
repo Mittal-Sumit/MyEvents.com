@@ -11,3 +11,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+:root {
+  --hybrid-primary: #3498db; /* A hybrid color of blue */
+    --hybrid-secondary: #8e44ad; /* A hybrid color of purple */
+    --hybrid-accent: #e67e22; /* A hybrid color of orange */
+    --hybrid-light: #f1c40f; /* A light hybrid yellow */
+    --hybrid-dark: #2c3e50; /* A dark hybrid blue-gray */
+    --hybrid-complementary: #16a085; /* A complementary hybrid green */
+    --light-mint: #d1f5d3;
+}

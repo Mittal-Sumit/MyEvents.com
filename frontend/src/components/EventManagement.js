@@ -64,7 +64,11 @@ const EventManagement = () => {
             clearForm();
             setShowCreateForm(false);
         } catch (error) {
-            toast.error('Error creating/updating event');
+            if (error.response && error.response.data) {
+                toast.error(error.response.data.date || 'Error creating/updating event');
+            } else {
+                toast.error('An error occurred, please try again.');
+            }
         }
     };
 

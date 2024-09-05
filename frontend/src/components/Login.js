@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import { toast } from 'react-toastify';
-import Header from './Header';
+import HeaderAuth from './HeaderAuth';
 import TextInput from './Login/TextInput'; 
 import PasswordToggle from './Login/PasswordToggle'; 
 import { handleLogin } from '../utils/authUtils'; 
@@ -27,7 +27,7 @@ const Login = () => {
 
     return (
         <div className="auth-container">
-            <Header />
+            <HeaderAuth />
             <Typography variant="h5" gutterBottom>
                 Login
             </Typography>

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import { toast } from 'react-toastify'; 
-import Header from './Header'; 
+import HeaderAuth from './HeaderAuth'; 
 import TextInput from './Login/TextInput'; // Reusing the TextInput component
 import './AuthStyles.css'; 
 
@@ -28,7 +28,7 @@ const ResetPassword = () => {
 
     return (
         <div className="auth-container">
-            <Header /> 
+            <HeaderAuth /> 
             <Typography variant="h5" gutterBottom>
                 Reset Password
             </Typography>

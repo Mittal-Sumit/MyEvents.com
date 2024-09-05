@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axiosInstance from '../utils/axiosInstance';
 import { toast } from 'react-toastify';
 import { Button, Typography } from '@mui/material';
-import EventDataGrid from './Event/EventDataGrid';
+import EventListDataGrid from './Event/EventListDataGrid'; // Changed file name to EventListDataGrid
 import { parseISO, isSameDay } from 'date-fns'; 
 import './EventList.css';
 import { useNavigate } from 'react-router-dom';
@@ -14,11 +14,13 @@ const EventList = () => {
     const [dateFilter, setDateFilter] = useState('');
     const [locationFilter, setLocationFilter] = useState('');
     const [availableLocations, setAvailableLocations] = useState([]);
+    const [registeredEvents, setRegisteredEvents] = useState([]); // Store registered event IDs
 
     const navigate = useNavigate();
 
     useEffect(() => {
         fetchEvents();
+        fetchRegisteredEvents();
     }, []);
 
     useEffect(() => {
@@ -58,6 +60,37 @@ const EventList = () => {
         }
     };
 
+    const fetchRegisteredEvents = async () => {
+        try {
+            const response = await axiosInstance.get('/rsvp/registered-events/');
+            setRegisteredEvents(response.data.map(event => event.id)); // Store registered event IDs
+        } catch (error) {
+            toast.error('Error fetching registered events');
+        }
+    };
+
+    const handleRegister = async (eventId) => {
+        try {
+            await axiosInstance.post('/rsvp/register/', { event_id: eventId });
+            toast.success('Registered for event!');
+            fetchRegisteredEvents(); // Refresh registered events after registration
+        } catch (error) {
+            toast.error('Failed to register, please try again.');
+        }
+    };
+
+    const handleRSVP = async (eventId, status) => {
+        try {
+            await axiosInstance.post('/rsvp/rsvps/', {
+                event_id: eventId,
+                status: status
+            });
+            toast.success('RSVP updated successfully!');
+        } catch (error) {
+            toast.error('Failed to RSVP, please try again.');
+        }
+    };
+
     return (
         <div className="event-list-page">
             <div className="header-container">
@@ -74,7 +107,7 @@ const EventList = () => {
                 </Button>
             </div>
 
-            <EventDataGrid
+            <EventListDataGrid
                 events={filteredEvents}
                 searchQuery={searchQuery}
                 setSearchQuery={setSearchQuery}
@@ -83,6 +116,9 @@ const EventList = () => {
                 locationFilter={locationFilter}
                 setLocationFilter={setLocationFilter}
                 availableLocations={availableLocations}
+                registeredEvents={registeredEvents} // Pass the registered events list
+                handleRegister={handleRegister} // Pass the register function
+                handleRSVP={handleRSVP} // Pass the RSVP function
                 showFilters={true}
             />
         </div>

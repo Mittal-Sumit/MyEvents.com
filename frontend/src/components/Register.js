@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import { toast } from 'react-toastify';
-import Header from './Header';
+import HeaderAuth from './HeaderAuth';
 import TextInput from './Login/TextInput'; 
 import PasswordStrengthInput from './Register/PasswordStrengthInput'; 
 import ConfirmPasswordInput from './Register/ConfirmPasswordInput'; 
@@ -42,7 +42,7 @@ const Register = () => {
 
     return (
         <div className="auth-container">
-            <Header />
+            <HeaderAuth />
             <Typography variant="h5" gutterBottom>
                 Register
             </Typography>

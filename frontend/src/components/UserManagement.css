@@ -44,9 +44,7 @@ button {
     transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #45a049;
-}
+
 
 button:disabled {
     background-color: #ccc;

@@ -1,10 +1,11 @@
+/* src/components/HeaderAuth.css */
 .header-auth {
-    background-color: black; 
-    color: white; 
-    padding: 10px;
-    text-align: center;
-    font-size: 10px;
-    font-weight: bold;
-    font-family: 'Arial', sans-serif; 
-    margin-bottom: 20px; 
+  background-color: black;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: bold;
+  font-family: "Arial", sans-serif;
+  margin-bottom: 20px;
 }

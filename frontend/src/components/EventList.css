@@ -1,8 +1,8 @@
 /* src/components/EventList.css */
 
 .event-list-page {
-    background-color: #f0f0f0; /* Light grey background for consistency */
-    padding: 40px 20px; /* Padding around the entire page */
+    background-color: beige; /* Light grey background for consistency */
+    padding: 0px 20px; /* Padding around the entire page */
     min-height: 100vh; /* Ensures the page fills the viewport height */
     box-sizing: border-box; /* Ensures padding does not add to the element's width */
     display: flex;
@@ -28,6 +28,7 @@
     font-size: 24px;
     font-weight: bold;
     color: #FFFFFF; /* Matches the theme */
+    text-align: center;
 }
 
 .filter-container {

@@ -1,42 +1,41 @@
+/* src/components/AdminDashboard.css */
 .admin-dashboard-page {
-    background-color: #f0f0f0; 
-    color: #333; 
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
+  background-color: #f0f0f0;
+  color: #333;
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 .main-header {
-    background-color: #333; 
-    color: white; 
-    padding: 20px;
-    text-align: center;
-    position: relative;
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  position: relative;
 }
 .main-header h1 {
-    margin: 0;
-    font-size: 24px;
-    font-weight: bold;
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
 }
-
 
 .logout-button:hover {
-    background-color: #c62828; 
+  background-color: #c62828;
 }
-
 
 /* Dashboard section styles */
 .dashboard-section {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 .admin-button {
-    padding: 10px 20px;
-    background-color: #4caf50; 
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 .admin-button:hover {
-    background-color: #388e3c; 
+  background-color: #388e3c;
 }

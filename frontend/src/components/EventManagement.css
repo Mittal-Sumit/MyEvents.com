@@ -1,112 +1,111 @@
+/* src/components/EventManagement.css */
 .event-management-page {
-    background-color: #f0f0f0;
-    padding: 20px 20px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: 'Roboto', sans-serif;
-    overflow: hidden;
-
+  background-color: beige;
+  padding: 0px 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Roboto", sans-serif;
+  overflow: hidden;
 }
 
 .header-container {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 0px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 0px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .page-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #FFFFFF;
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
 }
 
-.back-to-admin-button, .create-event-button {
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-transform: none;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease;
-    margin-left: 10px;
+.back-to-admin-button,
+.create-event-button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-transform: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
 }
 
 .back-to-admin-button:hover {
-    background-color: #388E3C;
+  background-color: #388e3c;
 }
 
 .create-event-button:hover {
-    background-color: #9c27b0;
+  background-color: #9c27b0;
 }
 
 .search-bar-container {
-    width: 80%;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    margin-top: 10px;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  margin-top: 10px;
 }
 
 .search-bar {
-    width: 300px;
+  width: 300px;
 }
 
 .date-filter {
-    width: 180px;
+  width: 180px;
 }
 
 .location-filter {
-    width: 200px;
+  width: 200px;
 }
 
 .datagrid-container {
-    width: 100%;
-    max-height: 60vh;
-    overflow: auto;
-    background-color: #FFFFFF;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    padding: 20px;
-
-    
+  width: 100%;
+  max-height: 71vh;
+  overflow: auto;
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 0px;
+  padding: 20px;
 }
 
 .event-button {
-    padding: 5px 10px;
-    margin-right: 5px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  padding: 5px 10px;
+  margin-right: 5px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .event-button.delete-button {
-    background-color: #f44336;
+  background-color: #f44336;
 }
 
 .event-button:hover {
-    background-color: #388E3C;
+  background-color: #388e3c;
 }
 
 .event-button.delete-button:hover {
-    background-color: #c62828;
+  background-color: #c62828;
 }
 
 /* Separate container for filters to control layout */
 .filters-container {
-    width: 80%;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    align-items: center; /* Align items vertically */
-    padding-top: 10px; /* Add padding for separation */
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  align-items: center; /* Align items vertically */
+  padding-top: 10px; /* Add padding for separation */
 }

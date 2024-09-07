@@ -9,7 +9,6 @@ class EventSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ('created_by',)
 
-    # Validation to ensure the event date is in the future
     def validate_date(self, value):
         if value < timezone.now():
             raise serializers.ValidationError("The event date must be in the future.")

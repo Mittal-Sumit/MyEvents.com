@@ -1,154 +1,167 @@
-html,body {
-    background: #DCDDDF url(https://cssdeck.com/uploads/media/items/7/7AF2Qzt.png);
-    color: #000;
-    font: 14px Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    position: relative;
-    background-size: cover;
-    background-attachment: fixed;
-    overflow-x: hidden;
+/* src/components/AuthStyles.css */
+html,
+body {
+  background: #dcdddf url(https://cssdeck.com/uploads/media/items/7/7AF2Qzt.png);
+  color: #000;
+  font: 14px Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  background-size: cover;
+  background-attachment: fixed;
+  overflow-x: hidden;
 }
 
 /* Container Styling for Auth Pages */
 .auth-container {
-    background: rgb(225, 225, 225); 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: 1px solid #c4c6ca;
-    margin: 60px auto;
-    padding: 30px;
-    text-align: center;
-    width: 450px; 
-    border-radius: 12px;
-    position: relative;
-    animation: fadeIn 1s ease-in-out;
+  background: rgb(225, 225, 225);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #c4c6ca;
+  margin: 60px auto;
+  padding: 30px;
+  text-align: center;
+  width: 450px;
+  border-radius: 12px;
+  position: relative;
+  animation: fadeIn 1s ease-in-out;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
-
 
 .auth-container h5 {
-    color: #4A4A4A;
-    font: bold 26px Helvetica, Arial, sans-serif;
-    letter-spacing: -0.05em;
-    margin: 20px 0 30px;
+  color: #4a4a4a;
+  font: bold 26px Helvetica, Arial, sans-serif;
+  letter-spacing: -0.05em;
+  margin: 20px 0 30px;
 }
 
-
 .auth-input {
-    border-radius: 5px;
-    box-shadow: 0 1px 0 #fff, 0 -2px 5px rgba(0, 0, 0, 0.08) inset;
-    background: #fff;
-    border: 1px solid #c8c8c8;
-    color: #333;
-    font: 14px Helvetica, Arial, sans-serif;
-    margin: 0 0 15px;
-    padding: 15px 10px;
-    width: 85%;
-    transition: all 0.3s ease;
+  border-radius: 5px;
+  box-shadow: 0 1px 0 #fff, 0 -2px 5px rgba(0, 0, 0, 0.08) inset;
+  background: #fff;
+  border: 1px solid #c8c8c8;
+  color: #333;
+  font: 14px Helvetica, Arial, sans-serif;
+  margin: 0 0 15px;
+  padding: 15px 10px;
+  width: 85%;
+  transition: all 0.3s ease;
 }
 
 .auth-input:focus {
-    box-shadow: 0 0 3px #4CAF50 inset;
-    background-color: #f0f0f0;
-    border: 1px solid #4CAF50;
-    outline: none;
+  box-shadow: 0 0 3px #4caf50 inset;
+  background-color: #f0f0f0;
+  border: 1px solid #4caf50;
+  outline: none;
 }
 
 /* Buttons */
-.auth-button, .auth-link-button {
-    border-radius: 30px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;
-    border: 1px solid #D69E31;
-    color: #fff;
-    cursor: pointer;
-    font: bold 15px Helvetica, Arial, sans-serif;
-    height: 40px;
-    width: 140px; 
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
-    margin: 20px 10px 10px 0;
-    background: #4CAF50;
-    transition: background-color 0.3s ease;
+.auth-button,
+.auth-link-button {
+  border-radius: 30px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;
+  border: 1px solid #d69e31;
+  color: #fff;
+  cursor: pointer;
+  font: bold 15px Helvetica, Arial, sans-serif;
+  height: 40px;
+  width: 140px;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+  margin: 20px 10px 10px 0;
+  background: #4caf50;
+  transition: background-color 0.3s ease;
 }
 
-.auth-button:hover, .auth-link-button:hover {
-    background-color: #45a049;
+.auth-button:hover,
+.auth-link-button:hover {
+  background-color: #45a049;
 }
 
 /* Forgot Password Button */
 .auth-link-button {
-    background: #fff; 
-    color: #4CAF50;  
-    border: 1px solid #4CAF50; 
+  background: #fff;
+  color: #4caf50;
+  border: 1px solid #4caf50;
 }
 
 .auth-link-button:hover {
-    background: #5e5e5e;
+  background: #5e5e5e;
 }
 
 /* Link Styling */
 .auth-link {
-    color: #4CAF50;
-    font-size: 14px;
-    text-decoration: none;
-    margin-top: 20px;
-    display: inline-block;
+  color: #4caf50;
+  font-size: 14px;
+  text-decoration: none;
+  margin-top: 20px;
+  display: inline-block;
 }
 
 .auth-link:hover {
-    color: #388E3C;
-    text-decoration: none; 
+  color: #388e3c;
+  text-decoration: none;
 }
 
 /* Forgot Password Link */
 .forgot-password-link {
-    font-size: 12px; 
-    color: #4CAF50;
-    margin-left: 10px;
-    text-decoration: none; 
+  font-size: 12px;
+  color: #4caf50;
+  margin-left: 10px;
+  text-decoration: none;
 }
 
 .forgot-password-link:hover {
-    color: #388E3C;
-    text-decoration: none; 
+  color: #388e3c;
+  text-decoration: none;
 }
 
 .password-field {
-    position: relative;
-    width: 100%;
+  position: relative;
+  width: 100%;
 }
 
 .toggle-password {
-    position: absolute;
-    right: 31px;
-    top: 44%; 
-    transform: translateY(-50%); 
-    cursor: pointer;
-    font-size: 18px;
-    color: #4CAF50; 
+  position: absolute;
+  right: 31px;
+  top: 44%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  color: #4caf50;
 }
 
 .toggle-password:hover {
-    color: #388E3C; 
+  color: #388e3c;
 }
 
 .toggle-login-password {
-    position: absolute;
-    right: 30px;
-    top: 42%; 
-    transform: translateY(-50%); 
-    cursor: pointer;
-    font-size: 18px;
-    color: #4CAF50;
-    background-color: transparent; 
+  position: absolute;
+  right: 30px;
+  top: 42%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  color: #4caf50;
+  background-color: transparent;
 }
 
 .password-strength-container {
-    width: 85%; 
-    margin-top: -10px;
-    margin-bottom: 10px;
-    margin-left: 30px;
+  width: 85%;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  margin-left: 30px;
+}
+
+.auth-keep-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
 }

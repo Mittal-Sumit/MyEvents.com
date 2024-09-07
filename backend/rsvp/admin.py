@@ -7,4 +7,5 @@ class RSVPAdmin(admin.ModelAdmin):
     list_filter = ('status',)  # Filter by RSVP status
     search_fields = ('user__username', 'event__title')  # Allow searching by username or event title
 
+
 admin.site.register(RSVP, RSVPAdmin)

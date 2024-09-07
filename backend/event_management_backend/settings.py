@@ -1,3 +1,4 @@
+#backend/event_management_backend/settings.py
 """
 Django settings for event_management_backend project.
 
@@ -14,7 +15,8 @@ from pathlib import Path
 from datetime import timedelta
 import os
 from dotenv import load_dotenv
-
+from drf_api_logger import API_LOGGER_SIGNAL
+import logging
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -76,7 +78,8 @@ REST_FRAMEWORK = {
 
 
 AUTH_USER_MODEL = 'users.CustomUser'
-
+DRF_API_LOGGER_METHODS = ['GET', 'POST', 'DELETE', 'PUT']
+DRF_API_LOGGER_STATUS_CODES = [200, 400, 404, 500]
 
 ROOT_URLCONF = 'event_management_backend.urls'
 
@@ -176,7 +179,8 @@ EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER')
  
-
+logger_requests = logging.getLogger("drf_api_logger")
+DRF_API_LOGGER_SIGNAL = True
 DRF_API_LOGGER_DATABASE = True
 
 

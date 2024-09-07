@@ -1,12 +1,11 @@
+# rsvp/views.py
 from django.shortcuts import render
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, status
 from .models import RSVP, Event
 from .serializers import RSVPSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from events.serializers import EventSerializer
-from rest_framework.exceptions import ValidationError
-from rest_framework import status 
 
 # RSVP creation and listing for the logged-in user
 class RSVPListCreateView(generics.ListCreateAPIView):
@@ -39,13 +38,13 @@ class RSVPDetailView(generics.RetrieveUpdateDestroyAPIView):
     def update(self, request, *args, **kwargs):
         # Ensure that the correct status is being passed
         instance = self.get_object()
-        status = request.data.get('status')
+        rsvp_status = request.data.get('status')
         
-        if status not in ['attending', 'not attending', 'maybe', 'cancelled']:
+        if rsvp_status not in ['attending', 'not attending', 'maybe', 'cancelled']:
             return Response({'error': 'Invalid RSVP status'}, status=status.HTTP_400_BAD_REQUEST)
         
         # Update the status field and save
-        instance.status = status
+        instance.status = rsvp_status
         instance.save()
         return Response({'message': 'RSVP updated successfully'}, status=status.HTTP_200_OK)
 
@@ -63,9 +62,9 @@ class RegisterForEventView(generics.CreateAPIView):
             if RSVP.objects.filter(user=request.user, event=event).exists():
                 return Response({'error': 'You are already registered for this event.'}, status=status.HTTP_400_BAD_REQUEST)
 
-            # Register the user without setting an RSVP status (status=None)
-            RSVP.objects.create(user=request.user, event=event)
-            return Response({'message': 'Successfully registered for event'}, status=status.HTTP_201_CREATED)
+            # Register the user and set the RSVP status to 'attending'
+            RSVP.objects.create(user=request.user, event=event, status='attending')
+            return Response({'message': 'Successfully registered for event with default RSVP of attending'}, status=status.HTTP_201_CREATED)
         
         except Event.DoesNotExist:
             return Response({'error': 'Event not found'}, status=status.HTTP_404_NOT_FOUND)
@@ -79,3 +78,21 @@ class RegisteredEventsView(generics.ListAPIView):
     def get_queryset(self):
         # Filter events that the current user has RSVP'd for
         return Event.objects.filter(rsvp__user=self.request.user)
+    
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        event_data = []
+        
+        for event in queryset:
+            rsvp = RSVP.objects.get(event=event, user=request.user)
+            event_data.append({
+                'id': event.id,
+                'title': event.title,
+                'description': event.description,
+                'date': event.date,
+                'location': event.location,
+                'created_by': event.created_by.id,
+                'rsvp_status': rsvp.status  # Add RSVP status
+            })
+        
+        return Response(event_data)

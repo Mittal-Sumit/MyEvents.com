@@ -4,6 +4,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
+from django.contrib.auth import update_session_auth_hash
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from rest_framework import generics, status, permissions
@@ -87,3 +88,26 @@ class UserListView(generics.ListAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAdminUser]
+
+class UserProfileView(generics.RetrieveUpdateAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user
+
+class ChangePasswordView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request):
+        user = request.user
+        old_password = request.data.get('old_password')
+        new_password = request.data.get('new_password')
+
+        if not user.check_password(old_password):
+            return Response({"error": "Old password is incorrect."}, status=400)
+
+        user.set_password(new_password)
+        user.save()
+        update_session_auth_hash(request, user)  # Keep user logged in after password change
+        return Response({"message": "Password updated successfully."})

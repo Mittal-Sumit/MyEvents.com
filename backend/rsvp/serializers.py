@@ -1,6 +1,6 @@
 # rsvp/serializers.py
 from rest_framework import serializers
-from .models import RSVP
+from .models import RSVP, GuestList
 
 class RSVPSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,3 +19,9 @@ class RSVPSerializer(serializers.ModelSerializer):
         instance.status = validated_data.get('status', instance.status)
         instance.save()
         return instance
+
+class GuestListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GuestList
+        fields = ['id', 'user', 'event', 'guest_name', 'email', 'status']
+        read_only_fields = ['user', 'event']

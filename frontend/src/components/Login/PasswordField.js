@@ -12,7 +12,7 @@ const PasswordField = ({ password, setPassword }) => {
   return (
     <div className="password-field">
       <TextInput
-        label="Enter your password"
+        label={"Enter Your Password"}
         type={showPassword ? "text" : "password"}
         placeholder="Password"
         value={password}

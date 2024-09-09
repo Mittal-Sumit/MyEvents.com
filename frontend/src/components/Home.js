@@ -8,7 +8,7 @@ import Header from "./Header";
 import WhatWeOffer from "./Home/WhatWeOffer";
 import AboutUsSection from "./Home/AboutUsSection"; // Import the About Us section
 import ImageBetweenSections from "./Home/ImageBetweenSections"; // Import the Image component
-import SliderComponent from "./Home/SliderComponent"; // Import the Slider component
+import EventCard from "./Home/EventCard";
 import ReactJoyride from "react-joyride";
 import { joyrideSteps } from "./joyrideSteps";
 import "./Home.css";
@@ -81,36 +81,6 @@ const Home = () => {
     }
   };
 
-  const sliderSettings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    arrows: false,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          dots: true,
-        },
-      },
-    ],
-  };
-
   return (
     <div className={`home-page ${isSidebarOpen ? "blur-background" : ""}`}>
       <Header toggleSidebar={toggleSidebar} handleLogout={handleLogout} />
@@ -129,16 +99,17 @@ const Home = () => {
 
       <div className="fullscreen-image-header" ref={headerRef}></div>
 
-      {/* About Us Section */}
       <AboutUsSection />
 
-      {/* What We Offer Section */}
       <WhatWeOffer />
 
-      {/* Event Slider */}
       <div className="main-content" ref={contentRef}>
         <h1>Upcoming Events</h1>
-        <SliderComponent events={events} sliderSettings={sliderSettings} />
+        <div className="event-grid">
+          {events.map((event) => (
+            <EventCard key={event.id} event={event} />
+          ))}
+        </div>
         <div className="view-all-events">
           <Link to="/event-list" className="view-all-link">
             View All Events
@@ -146,7 +117,6 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Image Between Sections */}
       <ImageBetweenSections />
 
       <div ref={footerRef}>

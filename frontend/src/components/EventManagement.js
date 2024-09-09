@@ -1,26 +1,33 @@
-/* src/components/EventManagement.js */
 import React, { useState, useEffect } from "react";
+import {
+  Button,
+  Typography,
+  TextField,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+} from "@mui/material";
+import EventDataGrid from "./Event/EventDataGrid";
 import axiosInstance from "../utils/axiosInstance";
 import { toast } from "react-toastify";
-import { Button, Typography, TextField } from "@mui/material";
-import EventDataGrid from "./Event/EventDataGrid";
 import "./EventManagement.css";
 import { useNavigate } from "react-router-dom";
 
 const EventManagement = () => {
   const [events, setEvents] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
   const [location, setLocation] = useState("");
   const [editEventId, setEditEventId] = useState(null);
-  const [showCreateForm, setShowCreateForm] = useState(false);
+  const [openEventDialog, setOpenEventDialog] = useState(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false); // For delete confirmation
+  const [eventToDelete, setEventToDelete] = useState(null); // Track event to be deleted
   const [locationFilter, setLocationFilter] = useState("");
   const [availableLocations, setAvailableLocations] = useState([]);
   const [dateFilter, setDateFilter] = useState("");
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,12 +38,12 @@ const EventManagement = () => {
     setFilteredEvents(
       events.filter(
         (event) =>
-          event.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
+          event.title.toLowerCase().includes(title.toLowerCase()) &&
           (locationFilter === "" || event.location === locationFilter) &&
           (dateFilter === "" || event.date.startsWith(dateFilter))
       )
     );
-  }, [searchQuery, locationFilter, dateFilter, events]);
+  }, [title, locationFilter, dateFilter, events]);
 
   const fetchEvents = async () => {
     try {
@@ -52,8 +59,7 @@ const EventManagement = () => {
     }
   };
 
-  const handleCreateOrUpdateEvent = async (e) => {
-    e.preventDefault();
+  const handleCreateOrUpdateEvent = async () => {
     const eventData = { title, description, date, location };
     try {
       if (editEventId) {
@@ -66,25 +72,9 @@ const EventManagement = () => {
       }
       fetchEvents();
       clearForm();
-      setShowCreateForm(false);
+      setOpenEventDialog(false);
     } catch (error) {
-      if (error.response && error.response.data) {
-        toast.error(
-          error.response.data.date || "Error creating/updating event"
-        );
-      } else {
-        toast.error("An error occurred, please try again.");
-      }
-    }
-  };
-
-  const handleDeleteEvent = async (eventId) => {
-    try {
-      await axiosInstance.delete(`/events/${eventId}/`);
-      toast.success("Event deleted successfully!");
-      fetchEvents();
-    } catch (error) {
-      toast.error("Error deleting event");
+      toast.error("Error creating/updating event");
     }
   };
 
@@ -94,7 +84,12 @@ const EventManagement = () => {
     setDate(event.date);
     setLocation(event.location);
     setEditEventId(event.id);
-    setShowCreateForm(true);
+    setOpenEventDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    clearForm();
+    setOpenEventDialog(false);
   };
 
   const clearForm = () => {
@@ -103,6 +98,27 @@ const EventManagement = () => {
     setDate("");
     setLocation("");
     setEditEventId(null);
+  };
+
+  const handleDeleteEvent = (eventId) => {
+    setEventToDelete(eventId); // Store the event to be deleted
+    setOpenDeleteDialog(true); // Open the confirmation dialog
+  };
+
+  const confirmDeleteEvent = async () => {
+    try {
+      await axiosInstance.delete(`/events/${eventToDelete}/`);
+      toast.success("Event deleted successfully!");
+      fetchEvents();
+      setOpenDeleteDialog(false);
+    } catch (error) {
+      toast.error("Error deleting event");
+    }
+  };
+
+  const handleCloseDeleteDialog = () => {
+    setOpenDeleteDialog(false);
+    setEventToDelete(null);
   };
 
   return (
@@ -123,15 +139,37 @@ const EventManagement = () => {
           variant="contained"
           color="secondary"
           className="create-event-button"
-          onClick={() => setShowCreateForm(!showCreateForm)}
+          onClick={() => setOpenEventDialog(true)}
         >
-          {showCreateForm ? "Cancel" : "Create New Event"}
+          Create New Event
         </Button>
       </div>
 
-      {showCreateForm && (
-        <div className="create-event-form">
-          <form onSubmit={handleCreateOrUpdateEvent} className="event-form">
+      <EventDataGrid
+        events={filteredEvents}
+        searchQuery={title}
+        setSearchQuery={setTitle}
+        dateFilter={dateFilter}
+        setDateFilter={setDateFilter}
+        locationFilter={locationFilter}
+        setLocationFilter={setLocationFilter}
+        availableLocations={availableLocations}
+        onEdit={handleEditEvent}
+        onDelete={handleDeleteEvent} // Pass the delete handler here
+        showFilters={true}
+      />
+
+      {/* Create or Edit Event Dialog */}
+      <Dialog
+        open={openEventDialog}
+        onClose={handleCloseDialog}
+        aria-labelledby="event-dialog-title"
+      >
+        <DialogTitle id="event-dialog-title">
+          {editEventId ? "Edit Event" : "Create New Event"}
+        </DialogTitle>
+        <DialogContent>
+          <form className="event-form">
             <TextField
               label="Event Title"
               variant="outlined"
@@ -172,33 +210,44 @@ const EventManagement = () => {
               fullWidth
               margin="normal"
             />
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              className="submit-event-button"
-              sx={{ mb: 2 }}
-              fullWidth
-            >
-              {editEventId ? "Update Event" : "Create Event"}
-            </Button>
           </form>
-        </div>
-      )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog} color="primary">
+            Cancel
+          </Button>
+          <Button
+            onClick={handleCreateOrUpdateEvent}
+            color="primary"
+            variant="contained"
+          >
+            {editEventId ? "Update Event" : "Create Event"}
+          </Button>
+        </DialogActions>
+      </Dialog>
 
-      <EventDataGrid
-        events={filteredEvents}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        dateFilter={dateFilter}
-        setDateFilter={setDateFilter}
-        locationFilter={locationFilter}
-        setLocationFilter={setLocationFilter}
-        availableLocations={availableLocations}
-        onEdit={handleEditEvent}
-        onDelete={handleDeleteEvent}
-        showFilters={true}
-      />
+      {/* Delete Confirmation Dialog */}
+      <Dialog
+        open={openDeleteDialog}
+        onClose={handleCloseDeleteDialog}
+        aria-labelledby="delete-dialog-title"
+      >
+        <DialogTitle id="delete-dialog-title">
+          Are you sure you want to delete this event?
+        </DialogTitle>
+        <DialogActions>
+          <Button onClick={handleCloseDeleteDialog} color="primary">
+            Cancel
+          </Button>
+          <Button
+            onClick={confirmDeleteEvent}
+            color="secondary"
+            variant="contained"
+          >
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

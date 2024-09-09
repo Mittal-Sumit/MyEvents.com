@@ -41,3 +41,19 @@
   background-color: #444444;
   color: white;
 }
+
+.header-icons {
+  display: flex;
+  align-items: center;
+}
+
+.profile-icon {
+  font-size: 30px;
+  padding: 8px 8px;
+  cursor: pointer;
+  color: white;
+}
+
+.profile-icon:hover {
+  color: #ccc;
+}

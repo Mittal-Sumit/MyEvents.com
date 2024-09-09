@@ -36,7 +36,11 @@ const Login = () => {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-        <PasswordField password={password} setPassword={setPassword} />
+        <PasswordField
+          password={password}
+          setPassword={setPassword}
+          label={"Enter You Password"}
+        />
         <div className="auth-keep-center">
           <input type="submit" className="auth-button" value="Login" />
           <Link to="/reset-password" className="auth-link forgot-password-link">

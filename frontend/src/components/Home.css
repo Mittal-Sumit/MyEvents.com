@@ -158,17 +158,26 @@ body {
   position: relative;
   box-sizing: border-box;
 }
-.event-card {
-  margin: 10px 0;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
-  width: 300px; /* or any desired width */
-  height: auto; /* auto height to maintain aspect ratio */
-  margin: 0 auto; /* Centering the card */
+/* Grid container for upcoming events */
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+  grid-gap: 20px;
+  justify-items: center;
 }
 
-.event-card:hover {
-  transform: translateY(-5px);
+@media (max-width: 1024px) {
+  /* Adjust grid for medium screens */
+  .event-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+  }
+}
+
+@media (max-width: 768px) {
+  /* Adjust grid for small screens */
+  .event-grid {
+    grid-template-columns: 1fr; /* 1 card per row */
+  }
 }
 
 .view-all-events {

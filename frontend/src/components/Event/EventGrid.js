@@ -1,3 +1,4 @@
+/* src/components/Event/EventGrid.js */
 import React, { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import {
@@ -33,30 +34,30 @@ const EventGrid = ({
   isListMode = false,
 }) => {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
-  const [eventToDelete, setEventToDelete] = useState(null); // Store the event to delete
+  const [eventToDelete, setEventToDelete] = useState(null);
 
   const handleDeleteClick = (eventId) => {
-    setEventToDelete(eventId); // Set the event to be deleted
-    setOpenDeleteDialog(true); // Open the delete confirmation dialog
+    setEventToDelete(eventId);
+    setOpenDeleteDialog(true);
   };
 
   const handleConfirmDelete = () => {
     if (eventToDelete) {
-      onDelete(eventToDelete); // Call the delete function passed from props
-      setOpenDeleteDialog(false); // Close the dialog
-      setEventToDelete(null); // Reset the event to delete
+      onDelete(eventToDelete);
+      setOpenDeleteDialog(false);
+      setEventToDelete(null);
     }
   };
 
   const handleCloseDeleteDialog = () => {
-    setOpenDeleteDialog(false); // Close the dialog
-    setEventToDelete(null); // Reset the event to delete
+    setOpenDeleteDialog(false);
+    setEventToDelete(null);
   };
 
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
     { field: "title", headerName: "Title", width: 150 },
-    { field: "description", headerName: "Description", width: 200 },
+    { field: "description", headerName: "Description", width: 400 },
     {
       field: "date",
       headerName: "Date and Time",
@@ -88,6 +89,7 @@ const EventGrid = ({
                 return registeredEvents.includes(eventId) ? (
                   <div>
                     <Button
+                      sx={{ backgroundColor: "green", color: "white" }}
                       variant="outlined"
                       color="primary"
                       onClick={() => handleRSVP(eventId, "attending")}
@@ -95,6 +97,7 @@ const EventGrid = ({
                       Attending
                     </Button>
                     <Button
+                      sx={{ backgroundColor: "red", color: "white" }}
                       variant="outlined"
                       color="secondary"
                       onClick={() => handleRSVP(eventId, "not attending")}
@@ -102,6 +105,7 @@ const EventGrid = ({
                       Not Attending
                     </Button>
                     <Button
+                      sx={{ backgroundColor: "grey", color: "white" }}
                       variant="outlined"
                       onClick={() => handleRSVP(eventId, "maybe")}
                     >
@@ -110,6 +114,7 @@ const EventGrid = ({
                   </div>
                 ) : (
                   <Button
+                    sx={{ backgroundColor: "blue", color: "white" }}
                     variant="contained"
                     color="secondary"
                     onClick={() => handleRegister(eventId)}

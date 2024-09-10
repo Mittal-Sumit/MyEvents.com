@@ -2,7 +2,7 @@
 import { React, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "./Footer";
-import Header from "./Header"; // Import the Header component
+import Header from "./Header";
 import "./AdminDashboard.css";
 
 const AdminDashboard = () => {

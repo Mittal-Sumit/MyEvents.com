@@ -9,25 +9,25 @@
 }
 
 .what-we-offer-heading {
-  font-family: "Playfair Display", serif; /* Stylish font */
-  font-size: 48px; /* Larger than the card headings */
-  font-weight: 700; /* Bold for emphasis */
+  font-family: "Playfair Display", serif;
+  font-size: 48px;
+  font-weight: 700;
   text-align: center;
-  color: #ffffff; /* Assuming the background is dark */
-  margin-bottom: 30px; /* Spacing between the heading and content */
-  text-transform: uppercase; /* If you want the heading in all caps */
+  color: #ffffff;
+  margin-bottom: 30px;
+  text-transform: uppercase;
 }
 
 .what-we-offer-section h2 {
-  font-family: "Roboto", sans-serif; /* Simple, clean font */
-  font-size: 24px; /* Smaller than the main heading */
+  font-family: "Roboto", sans-serif;
+  font-size: 24px;
   font-weight: 500;
-  color: black; /* Keep it readable against the dark background */
-  margin-bottom: 15px; /* Some space below the heading */
+  color: black;
+  margin-bottom: 15px;
 }
 
 .offer-card {
-  background-color: hsl(242deg 56.47% 86.62%);
+  background-color: hsl(242deg 56.47% 86.62%) !important;
   color: black;
   border-radius: 10px;
   padding: 20px;

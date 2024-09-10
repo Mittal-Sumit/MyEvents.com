@@ -1,0 +1,9 @@
+
+Hello {{ user.username }},
+
+This is a reminder that you are registered for the event "{{ event.title }}" happening on {{ event.date }}.
+
+Looking forward to seeing you there!
+
+Regards,
+MyEvent.com Team

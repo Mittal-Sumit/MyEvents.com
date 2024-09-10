@@ -85,32 +85,27 @@ const EventList = () => {
 
   const handleRSVP = async (eventId, status) => {
     try {
-      // Retrieve token from session storage
-      const token = sessionStorage.getItem("accessToken"); // Ensure this key matches your storage key
+      const token = sessionStorage.getItem("accessToken");
 
       if (!token) {
         throw new Error("User is not authenticated");
       }
 
-      console.log("Token retrieved:", token); // Debugging: Check if the token is being retrieved
+      console.log("Token retrieved:", token);
 
-      // Decode the token to get the user ID
       const decodedToken = jwtDecode(token);
-      console.log("Decoded token:", decodedToken); // Debugging: Check decoded token content
-      const loggedInUserId = decodedToken.user_id; // Assuming the user ID is in 'user_id'
+      console.log("Decoded token:", decodedToken);
+      const loggedInUserId = decodedToken.user_id;
 
-      // Fetch the current user's RSVP for the event
       const response = await axiosInstance.get(
         `/rsvp/rsvps/?event_id=${eventId}`
       );
 
-      // Find the RSVP entry for the logged-in user and the event
       const rsvp = response.data.find(
         (rsvp) => rsvp.event === eventId && rsvp.user === loggedInUserId
       );
 
       if (rsvp) {
-        // Update the RSVP status for this user and event
         await axiosInstance.patch(`/rsvp/rsvps/${rsvp.id}/`, {
           status: status,
         });

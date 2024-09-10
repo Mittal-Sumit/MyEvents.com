@@ -1,3 +1,4 @@
+/* src/components/EventManagement.js */
 import React, { useState, useEffect } from "react";
 import {
   Button,
@@ -23,8 +24,8 @@ const EventManagement = () => {
   const [location, setLocation] = useState("");
   const [editEventId, setEditEventId] = useState(null);
   const [openEventDialog, setOpenEventDialog] = useState(false);
-  const [openDeleteDialog, setOpenDeleteDialog] = useState(false); // For delete confirmation
-  const [eventToDelete, setEventToDelete] = useState(null); // Track event to be deleted
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const [eventToDelete, setEventToDelete] = useState(null);
   const [locationFilter, setLocationFilter] = useState("");
   const [availableLocations, setAvailableLocations] = useState([]);
   const [dateFilter, setDateFilter] = useState("");
@@ -101,18 +102,20 @@ const EventManagement = () => {
   };
 
   const handleDeleteEvent = (eventId) => {
-    setEventToDelete(eventId); // Store the event to be deleted
-    setOpenDeleteDialog(true); // Open the confirmation dialog
+    setEventToDelete(eventId);
+    setOpenDeleteDialog(true);
   };
 
   const confirmDeleteEvent = async () => {
     try {
       await axiosInstance.delete(`/events/${eventToDelete}/`);
       toast.success("Event deleted successfully!");
-      fetchEvents();
       setOpenDeleteDialog(false);
+      fetchEvents();
     } catch (error) {
       toast.error("Error deleting event");
+    } finally {
+      setEventToDelete(null);
     }
   };
 
@@ -155,11 +158,10 @@ const EventManagement = () => {
         setLocationFilter={setLocationFilter}
         availableLocations={availableLocations}
         onEdit={handleEditEvent}
-        onDelete={handleDeleteEvent} // Pass the delete handler here
+        onDelete={handleDeleteEvent}
         showFilters={true}
       />
 
-      {/* Create or Edit Event Dialog */}
       <Dialog
         open={openEventDialog}
         onClose={handleCloseDialog}
@@ -226,7 +228,6 @@ const EventManagement = () => {
         </DialogActions>
       </Dialog>
 
-      {/* Delete Confirmation Dialog */}
       <Dialog
         open={openDeleteDialog}
         onClose={handleCloseDeleteDialog}

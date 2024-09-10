@@ -35,7 +35,7 @@ class GuestList(models.Model):
         max_length=20,
         choices=[
             ('attending', 'Attending'), 
-            ('not_attending', 'Not Attending'), 
+            ('not attending', 'Not Attending'), 
             ('maybe', 'Maybe'), 
             ('checked_in', 'Checked In')
         ],

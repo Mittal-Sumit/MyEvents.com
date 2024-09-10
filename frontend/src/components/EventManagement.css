@@ -100,12 +100,35 @@
   background-color: #c62828;
 }
 
-/* Separate container for filters to control layout */
 .filters-container {
   width: 80%;
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
-  align-items: center; /* Align items vertically */
-  padding-top: 10px; /* Add padding for separation */
+  align-items: center;
+  padding-top: 10px;
+}
+
+.email-filter,
+.status-filter {
+  width: 200px;
+}
+
+.guestlist-page {
+  background-color: beige;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Roboto", sans-serif;
+  overflow: hidden;
+}
+
+.filter-container {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  justify-content: center;
 }

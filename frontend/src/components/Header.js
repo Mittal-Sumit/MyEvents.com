@@ -1,7 +1,8 @@
+/* src/components/Header.js */
 import React from "react";
 import "./Header.css";
 import { useNavigate } from "react-router-dom";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle"; // Import Material UI Icon
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const Header = ({ toggleSidebar, handleLogout }) => {
   const navigate = useNavigate();
@@ -17,7 +18,6 @@ const Header = ({ toggleSidebar, handleLogout }) => {
       </button>
       <h1 className="site-title">MyEvent.com</h1>
       <div className="header-icons">
-        {/* Profile Icon */}
         <AccountCircleIcon
           className="profile-icon"
           onClick={handleProfileClick}

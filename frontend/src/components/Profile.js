@@ -1,4 +1,6 @@
+/* src/components/Profile.css*/
 import React, { useState, useEffect } from "react";
+import { jwtDecode } from "jwt-decode";
 import {
   Button,
   Typography,
@@ -12,7 +14,8 @@ import axiosInstance from "../utils/axiosInstance";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import PasswordField from "./Login/PasswordField";
-import "./Profile.css";
+import "./AuthStyles.css"; // Reusing styles from the login page
+import { green } from "@mui/material/colors";
 
 const Profile = () => {
   const [userData, setUserData] = useState({ username: "", email: "" });
@@ -20,7 +23,7 @@ const Profile = () => {
   const [newPassword, setNewPassword] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [openEditModal, setOpenEditModal] = useState(false); // Modal state
+  const [openEditModal, setOpenEditModal] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,8 +43,8 @@ const Profile = () => {
     try {
       await axiosInstance.put("/users/me/", editData);
       toast.success("Profile updated successfully.");
-      setUserData(editData); // Update main profile after successful edit
-      setOpenEditModal(false); // Close the modal
+      setUserData(editData);
+      setOpenEditModal(false);
     } catch (error) {
       toast.error("Failed to update profile.");
     }
@@ -65,19 +68,36 @@ const Profile = () => {
   };
 
   const handleEditButtonClick = () => {
-    setEditData(userData); // Set current data into the modal form
-    setOpenEditModal(true); // Open the modal
+    setEditData(userData);
+    setOpenEditModal(true);
   };
 
   const handleCloseEditModal = () => {
-    setOpenEditModal(false); // Close modal without saving
+    setOpenEditModal(false);
+  };
+
+  const handleBackToHome = () => {
+    const token = sessionStorage.getItem("accessToken");
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      const userRole = decodedToken.role;
+
+      if (userRole === "admin") {
+        navigate("/admin-dashboard");
+      } else {
+        navigate("/home");
+      }
+    } else {
+      navigate("/login");
+    }
   };
 
   return (
-    <div className="profile-page">
-      <Typography variant="h4">Profile</Typography>
+    <div className="auth-container">
+      <Typography variant="h5" gutterBottom>
+        Profile
+      </Typography>
 
-      {/* Display user details */}
       <Typography variant="body1">
         <strong>Username:</strong> {userData.username}
       </Typography>
@@ -85,56 +105,50 @@ const Profile = () => {
         <strong>Email:</strong> {userData.email}
       </Typography>
 
-      {/* Button to trigger edit modal */}
       <Button
+        sx={{ marginRight: 15 }}
         variant="contained"
-        color="primary"
+        className="auth-button"
         onClick={handleEditButtonClick}
       >
         Edit Details
       </Button>
 
-      {/* Button to go back to home */}
       <Button
-        variant="outlined"
-        color="secondary"
-        style={{ marginTop: "10px" }}
-        onClick={() => navigate("/home")}
+        sx={{ color: "black" }}
+        className="auth-button"
+        onClick={handleBackToHome}
       >
         Back to Home
       </Button>
 
-      {/* Password Change Section */}
       <Typography variant="h5" style={{ marginTop: "20px" }}>
         Change Password
       </Typography>
       <PasswordField
         password={oldPassword}
         setPassword={setOldPassword}
-        label="Old Password"
+        customLabel="Old Password"
       />
       <PasswordField
         password={newPassword}
         setPassword={setNewPassword}
-        label="New Password"
+        customLabel="New Password"
       />
       <PasswordField
         password={confirmPassword}
         setPassword={setConfirmPassword}
-        label="Confirm New Password"
+        customLabel="Confirm New Password"
       />
 
       <Button
         variant="contained"
-        color="secondary"
-        fullWidth
+        className="auth-button"
         onClick={handlePasswordChange}
-        style={{ marginTop: "10px" }}
       >
         Change Password
       </Button>
 
-      {/* Modal for editing profile details */}
       <Dialog open={openEditModal} onClose={handleCloseEditModal}>
         <DialogTitle>Edit Profile</DialogTitle>
         <DialogContent>

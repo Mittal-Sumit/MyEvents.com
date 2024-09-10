@@ -1,3 +1,4 @@
+/*src/components/Home/EventCard.js*/
 import React, { useState } from "react";
 import {
   Card,
@@ -29,7 +30,7 @@ const EventCard = ({ event }) => {
 
   return (
     <>
-      <Card className="event-card">
+      <Card className="event-card" sx={{ border: "1px solid white" }}>
         <CardMedia
           component="img"
           height="140"
@@ -50,7 +51,12 @@ const EventCard = ({ event }) => {
           <Typography variant="subtitle2">
             Date: {new Date(event.date).toLocaleDateString()}
           </Typography>
-          <Button variant="contained" color="primary" onClick={handleClickOpen}>
+          <Button
+            variant="contained"
+            color="primary"
+            className="register-button"
+            onClick={handleClickOpen}
+          >
             Details
           </Button>
         </CardContent>

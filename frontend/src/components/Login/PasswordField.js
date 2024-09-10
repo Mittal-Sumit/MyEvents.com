@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import TextInput from "./TextInput";
 import PasswordToggle from "./PasswordToggle";
 
-const PasswordField = ({ password, setPassword }) => {
+const PasswordField = ({ password, setPassword, customLabel }) => {
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
@@ -12,7 +12,7 @@ const PasswordField = ({ password, setPassword }) => {
   return (
     <div className="password-field">
       <TextInput
-        label={"Enter Your Password"}
+        label={customLabel || "Enter Your Password"}
         type={showPassword ? "text" : "password"}
         placeholder="Password"
         value={password}

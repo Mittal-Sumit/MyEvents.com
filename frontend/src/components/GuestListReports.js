@@ -1,30 +1,43 @@
 // src/components/GuestListReports.js
 import React, { useEffect, useState } from "react";
-import axiosInstance from "../utils/axiosInstance";
+import { DataGrid } from "@mui/x-data-grid";
 import {
-  CircularProgress,
   Box,
+  Button,
+  TextField,
+  MenuItem,
   Typography,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
+  InputAdornment,
 } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import SearchIcon from "@mui/icons-material/Search";
+import axiosInstance from "../utils/axiosInstance";
 import { toast } from "react-toastify";
-import GuestListComponent from "./GuestListComponent"; // Correct default import
+import GuestListPopup from "./GuestListPopup";
+import { useNavigate } from "react-router-dom";
 
 const GuestListReports = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [locationFilter, setLocationFilter] = useState("");
+  const [availableLocations, setAvailableLocations] = useState([]);
+  const [dateFilter, setDateFilter] = useState(""); // Date filter state
+  const [openPopup, setOpenPopup] = useState(false);
+  const [selectedEventId, setSelectedEventId] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetchEventsAndGuestLists();
+    fetchEvents();
   }, []);
 
-  const fetchEventsAndGuestLists = async () => {
+  const fetchEvents = async () => {
     try {
-      const response = await axiosInstance.get("/events/"); // Fetch all events
+      const response = await axiosInstance.get("/events/");
       setEvents(response.data);
+      const uniqueLocations = [
+        ...new Set(response.data.map((event) => event.location)),
+      ];
+      setAvailableLocations(uniqueLocations);
       setLoading(false);
     } catch (error) {
       toast.error("Error fetching events");
@@ -32,40 +45,120 @@ const GuestListReports = () => {
     }
   };
 
-  if (loading) {
-    return (
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        height="100vh"
-      >
-        <CircularProgress />
-      </Box>
-    );
-  }
+  const handleShowGuests = (eventId) => {
+    setSelectedEventId(eventId);
+    setOpenPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setOpenPopup(false);
+  };
+
+  const filteredEvents = events.filter(
+    (event) =>
+      event.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
+      (locationFilter === "" || event.location === locationFilter) &&
+      (dateFilter === "" || event.date.startsWith(dateFilter))
+  );
+
+  const eventColumns = [
+    { field: "id", headerName: "ID", width: 90 },
+    { field: "title", headerName: "Title", width: 200 },
+    { field: "location", headerName: "Location", width: 150 },
+    { field: "date", headerName: "Date", width: 150 },
+    {
+      field: "actions",
+      headerName: "Actions",
+      width: 200,
+      renderCell: (params) => (
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => handleShowGuests(params.row.id)}
+        >
+          Show Guests
+        </Button>
+      ),
+    },
+  ];
 
   return (
-    <div>
+    <div className="guestlist-page">
       <Typography variant="h4" gutterBottom>
         Event Guest List Reports
       </Typography>
 
-      {events.map((event) => (
-        <Accordion key={event.id}>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls={`panel-${event.id}-content`}
-            id={`panel-${event.id}-header`}
-          >
-            <Typography>{event.title}</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography variant="h6">Guest List for {event.title}</Typography>
-            <GuestListComponent eventId={event.id} />
-          </AccordionDetails>
-        </Accordion>
-      ))}
+      {/* Back to Admin Dashboard Button */}
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => navigate("/admin-dashboard")}
+        style={{ marginBottom: "20px" }}
+      >
+        Back to Admin Dashboard
+      </Button>
+
+      {/* Filters */}
+      <div className="filter-container">
+        <TextField
+          label="Search by Title"
+          variant="outlined"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="search-bar"
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+        />
+        <TextField
+          select
+          label="Location"
+          value={locationFilter}
+          onChange={(e) => setLocationFilter(e.target.value)}
+          className="location-filter"
+        >
+          <MenuItem value="">All Locations</MenuItem>
+          {availableLocations.map((location) => (
+            <MenuItem key={location} value={location}>
+              {location}
+            </MenuItem>
+          ))}
+        </TextField>
+        <TextField
+          label="Date"
+          type="date"
+          value={dateFilter}
+          onChange={(e) => setDateFilter(e.target.value)}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          className="date-filter"
+        />
+      </div>
+
+      {/* Event List DataGrid */}
+      <Box className="datagrid-container">
+        <DataGrid
+          rows={filteredEvents}
+          columns={eventColumns}
+          pageSize={5}
+          rowsPerPageOptions={[5, 10, 20]}
+          autoHeight
+          disableSelectionOnClick
+        />
+      </Box>
+
+      {/* Guest List Popup */}
+      {openPopup && (
+        <GuestListPopup
+          eventId={selectedEventId}
+          handleClose={handleClosePopup}
+        />
+      )}
     </div>
   );
 };

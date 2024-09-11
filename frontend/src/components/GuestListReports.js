@@ -1,4 +1,4 @@
-// src/components/GuestListReports.js
+/* src/components/GuestListReports.js */
 import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import {
@@ -21,7 +21,7 @@ const GuestListReports = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
   const [availableLocations, setAvailableLocations] = useState([]);
-  const [dateFilter, setDateFilter] = useState(""); // Date filter state
+  const [dateFilter, setDateFilter] = useState("");
   const [openPopup, setOpenPopup] = useState(false);
   const [selectedEventId, setSelectedEventId] = useState(null);
   const navigate = useNavigate();
@@ -87,15 +87,20 @@ const GuestListReports = () => {
       <Typography variant="h4" gutterBottom>
         Event Guest List Reports
       </Typography>
-
-      {/* Back to Admin Dashboard Button */}
+      {/* Go Back to Home Button */}
       <Button
-        variant="contained"
+        sx={{
+          ":hover": {
+            bgcolor: "primary.main", // theme.palette.primary.main
+            color: "white",
+          },
+        }}
         color="primary"
-        onClick={() => navigate("/admin-dashboard")}
-        style={{ marginBottom: "20px" }}
+        className="go-back-home-button"
+        onClick={() => navigate("/home")} // Navigate to home page
+        style={{ marginRight: "10px", marginBottom: "20px" }}
       >
-        Back to Admin Dashboard
+        Go Back to Home
       </Button>
 
       {/* Filters */}

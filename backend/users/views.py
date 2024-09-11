@@ -82,7 +82,16 @@ class UpdateUserRoleView(generics.UpdateAPIView):
     lookup_field = 'id'  
 
     def patch(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
+        user = self.get_object()  # Get the user whose role we want to update
+        new_role = request.data.get('role')
+
+        if new_role not in ['user', 'manager']:
+            return Response({"error": "Invalid role"}, status=400)
+
+        user.role = new_role
+        user.save()
+
+        return Response({"message": f"User's role has been updated to {new_role}"})
 
 class UserListView(generics.ListAPIView):
     queryset = CustomUser.objects.all()

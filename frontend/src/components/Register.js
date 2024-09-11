@@ -44,6 +44,14 @@ const Register = () => {
   return (
     <div className="auth-container">
       <HeaderAuth />
+      <div className="auth-go-back">
+        <button
+          className="go-back-home-button"
+          onClick={() => navigate("/home")}
+        >
+          Home
+        </button>
+      </div>
       <Typography variant="h5" gutterBottom>
         Register
       </Typography>

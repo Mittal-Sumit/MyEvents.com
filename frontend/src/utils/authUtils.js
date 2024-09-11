@@ -1,30 +1,46 @@
-// src/utils/authUtils.js
-
-import axiosInstance from './axiosInstance';
-import { toast } from 'react-toastify';
+import axiosInstance from "./axiosInstance";
+import { toast } from "react-toastify";
 
 export const handleLogin = async (username, password, navigate) => {
-    try {
-        const response = await axiosInstance.post('users/login/', {
-            username,
-            password,
-        });
+  try {
+    const response = await axiosInstance.post("users/login/", {
+      username,
+      password,
+    });
 
-        const { access, refresh } = response.data;
-        const tokenPayload = JSON.parse(atob(access.split('.')[1]));
-        const userRole = tokenPayload.role;
+    const { access, refresh } = response.data;
 
-        sessionStorage.setItem('accessToken', access);
-        sessionStorage.setItem('refreshToken', refresh);
-        toast.success('Login successful!');
+    // Decode token to get role
+    const tokenPayload = JSON.parse(atob(access.split(".")[1]));
+    const userRole = tokenPayload.role;
 
-        if (userRole === 'admin') {
-            navigate('/admin-dashboard');
-        } else {
-            navigate('/home');
-        }
-    } catch (error) {
-        toast.error('Invalid credentials, please try again.');
-        console.error('Error:', error);
+    // Store tokens in sessionStorage
+    sessionStorage.setItem("accessToken", access);
+    sessionStorage.setItem("refreshToken", refresh);
+    sessionStorage.setItem("userRole", userRole); // Storing user role just in case
+
+    // Navigate based on user role
+    toast.success("Login successful!");
+    navigate("/home");
+  } catch (error) {
+    if (error.response && error.response.status === 401) {
+      toast.error("Invalid credentials, please try again.");
+    } else {
+      toast.error("An unexpected error occurred.");
     }
+    console.error("Login Error:", error);
+  }
+};
+
+export const handleLogout = (navigate) => {
+  // Remove tokens and user-related data from session storage
+  sessionStorage.removeItem("accessToken");
+  sessionStorage.removeItem("refreshToken");
+  sessionStorage.removeItem("userRole");
+
+  // Show toast notification for logout
+  toast.success("Logged out successfully!");
+
+  // Redirect to home page
+  navigate("/home");
 };

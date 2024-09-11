@@ -1,11 +1,19 @@
 /* src/components/Sidebar.js */
 import React, { useState, useEffect, useRef } from "react";
 import "./Sidebar.css";
+import { useNavigate } from "react-router-dom";
 
-const Sidebar = ({ scrollToHeader, scrollToContent, scrollToFooter }) => {
+const Sidebar = ({
+  role,
+  navigateTo,
+  scrollToHeader,
+  scrollToContent,
+  scrollToFooter,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const sidebarRef = useRef(null);
   const burgerRef = useRef(null);
+  const navigate = useNavigate();
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -43,10 +51,33 @@ const Sidebar = ({ scrollToHeader, scrollToContent, scrollToFooter }) => {
             <li className="sidebar-item" onClick={scrollToContent}>
               Events
             </li>
+            {role === "manager" || role === "admin" ? (
+              <li
+                className="sidebar-item"
+                onClick={() => navigateTo("/event-management")}
+              >
+                Manage Events
+              </li>
+            ) : null}
+            {role === "admin" ? (
+              <>
+                <li
+                  className="sidebar-item"
+                  onClick={() => navigateTo("/user-management")}
+                >
+                  User Roles
+                </li>
+                <li
+                  className="sidebar-item"
+                  onClick={() => navigateTo("/reports")}
+                >
+                  Reports (Guest List)
+                </li>
+              </>
+            ) : null}
             <li className="sidebar-item" onClick={scrollToFooter}>
               Contact Us
-            </li>{" "}
-            {/* New About Us button */}
+            </li>
           </ul>
         </nav>
       </div>

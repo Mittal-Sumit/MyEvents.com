@@ -12,20 +12,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Container Styling for Auth Pages */
-.auth-container {
-  background: rgb(225, 225, 225);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid #c4c6ca;
-  margin: 60px auto;
-  padding: 30px;
-  text-align: center;
-  width: 450px;
-  border-radius: 12px;
-  position: relative;
-  animation: fadeIn 1s ease-in-out;
-}
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -33,13 +19,6 @@ body {
   to {
     opacity: 1;
   }
-}
-
-.auth-container h5 {
-  color: #4a4a4a;
-  font: bold 26px Helvetica, Arial, sans-serif;
-  letter-spacing: -0.05em;
-  margin: 20px 0 30px;
 }
 
 .auth-input {
@@ -164,4 +143,47 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
+}
+
+.auth-go-back {
+  position: absolute;
+  top: 10px; /* Adjust as needed for spacing */
+  right: 0px; /* Align to the right */
+  z-index: 10; /* Ensure it stays on top */
+}
+
+.go-back-home-button {
+  background-color: transparent;
+  border: solid green;
+  color: black;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.go-back-home-button:hover {
+  background-color: #45a049;
+}
+
+/* Other existing styles */
+.auth-container {
+  background: rgb(225, 225, 225);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #c4c6ca;
+  margin: 60px auto;
+  padding: 30px;
+  text-align: center;
+  width: 450px;
+  border-radius: 12px;
+  position: relative;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.auth-container h5 {
+  color: #4a4a4a;
+  font: bold 26px Helvetica, Arial, sans-serif;
+  letter-spacing: -0.05em;
+  margin: 20px 0 30px;
 }

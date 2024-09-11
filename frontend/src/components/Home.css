@@ -30,20 +30,22 @@ body {
 }
 
 .logout-button {
+  font-size: large;
   position: fixed;
   right: 40px;
   padding: 10px 20px;
-  background-color: grey;
+  background-color: transparent;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   font-weight: bold;
+  margin-right: 0px;
 }
 
 .logout-button:hover {
-  background-color: #444444;
+  background-color: red;
 }
 
 .burger-menu {

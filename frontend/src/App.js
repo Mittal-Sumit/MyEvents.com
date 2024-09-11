@@ -1,5 +1,3 @@
-// src/App.js
-
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -14,7 +12,6 @@ import Register from "./components/Register";
 import Home from "./components/Home";
 import Profile from "./components/Profile";
 import EventList from "./components/EventList";
-import AdminDashboard from "./components/AdminDashboard";
 import GuestListReports from "./components/GuestListReports";
 import EventManagement from "./components/EventManagement";
 import ResetPassword from "./components/ResetPassword";
@@ -32,17 +29,13 @@ const App = () => {
         hideProgressBar={false}
       />
       <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
+        {/* Home is public, no authentication required */}
+        <Route path="/" element={<Navigate to="/home" />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route
-          path="/home"
-          element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          }
-        />
+
+        {/* Authenticated Routes */}
         <Route
           path="/profile"
           element={
@@ -51,38 +44,8 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/admin-dashboard"
-          element={
-            <ProtectedRoute>
-              <AdminDashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/reports"
-          element={
-            <ProtectedRoute>
-              <GuestListReports />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/user-management"
-          element={
-            <ProtectedRoute>
-              <UserManagement />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/event-management"
-          element={
-            <ProtectedRoute>
-              <EventManagement />
-            </ProtectedRoute>
-          }
-        />
+
+        {/* Event List accessible to everyone after login */}
         <Route
           path="/event-list"
           element={
@@ -91,6 +54,34 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+
+        {/* Role-based protected routes */}
+        <Route
+          path="/event-management"
+          element={
+            <ProtectedRoute allowedRoles={["admin", "manager"]}>
+              <EventManagement />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/user-management"
+          element={
+            <ProtectedRoute allowedRoles={["admin"]}>
+              <UserManagement />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/reports"
+          element={
+            <ProtectedRoute allowedRoles={["admin"]}>
+              <GuestListReports />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Password reset routes */}
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route
           path="/reset-password-confirm/:uid/:token"

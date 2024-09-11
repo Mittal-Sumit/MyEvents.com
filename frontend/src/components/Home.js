@@ -6,8 +6,8 @@ import Sidebar from "./Sidebar";
 import Footer from "./Footer";
 import Header from "./Header";
 import WhatWeOffer from "./Home/WhatWeOffer";
-import AboutUsSection from "./Home/AboutUsSection"; // Import the About Us section
-import ImageBetweenSections from "./Home/ImageBetweenSections"; // Import the Image component
+import AboutUsSection from "./Home/AboutUsSection";
+import ImageBetweenSections from "./Home/ImageBetweenSections";
 import EventCard from "./Home/EventCard";
 import ReactJoyride from "react-joyride";
 import { joyrideSteps } from "./joyrideSteps";
@@ -17,6 +17,7 @@ const Home = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showJoyride, setShowJoyride] = useState(false);
   const [events, setEvents] = useState([]);
+  const [role, setRole] = useState(null); // Track user role
   const navigate = useNavigate();
   const headerRef = useRef(null);
   const contentRef = useRef(null);
@@ -63,8 +64,18 @@ const Home = () => {
       setShowJoyride(true);
     }
 
+    fetchUserRole(); // Fetch user role after login
     fetchUpcomingEvents();
   }, []);
+
+  const fetchUserRole = async () => {
+    try {
+      const response = await axiosInstance.get("/users/me/");
+      setRole(response.data.role); // Set user role from API
+    } catch (error) {
+      console.error("Error fetching user role:", error);
+    }
+  };
 
   const fetchUpcomingEvents = async () => {
     try {
@@ -81,6 +92,15 @@ const Home = () => {
     }
   };
 
+  const handleNavigation = (path) => {
+    const isAuthenticated = !!sessionStorage.getItem("accessToken");
+    if (!isAuthenticated) {
+      navigate("/login");
+    } else {
+      navigate(path);
+    }
+  };
+
   return (
     <div className={`home-page ${isSidebarOpen ? "blur-background" : ""}`}>
       <Header toggleSidebar={toggleSidebar} handleLogout={handleLogout} />
@@ -91,6 +111,8 @@ const Home = () => {
         }`}
       >
         <Sidebar
+          role={role}
+          navigateTo={(path) => handleNavigation(path)} // Redirect user based on role
           scrollToHeader={() => scrollToSection(headerRef)}
           scrollToContent={() => scrollToSection(contentRef)}
           scrollToFooter={() => scrollToSection(footerRef)}

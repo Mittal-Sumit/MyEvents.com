@@ -1,6 +1,5 @@
-/* src/components/Profile.css*/
+/* src/components/Profile.js */
 import React, { useState, useEffect } from "react";
-import { jwtDecode } from "jwt-decode";
 import {
   Button,
   Typography,
@@ -14,8 +13,7 @@ import axiosInstance from "../utils/axiosInstance";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import PasswordField from "./Login/PasswordField";
-import "./AuthStyles.css"; // Reusing styles from the login page
-import { green } from "@mui/material/colors";
+import "./AuthStyles.css";
 
 const Profile = () => {
   const [userData, setUserData] = useState({ username: "", email: "" });
@@ -77,19 +75,8 @@ const Profile = () => {
   };
 
   const handleBackToHome = () => {
-    const token = sessionStorage.getItem("accessToken");
-    if (token) {
-      const decodedToken = jwtDecode(token);
-      const userRole = decodedToken.role;
-
-      if (userRole === "admin") {
-        navigate("/admin-dashboard");
-      } else {
-        navigate("/home");
-      }
-    } else {
-      navigate("/login");
-    }
+    // Simply navigate to Home for all users
+    navigate("/home");
   };
 
   return (

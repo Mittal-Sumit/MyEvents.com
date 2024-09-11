@@ -1,15 +1,12 @@
-// src/components/Login.js
-
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Typography } from "@mui/material";
 import { toast } from "react-toastify";
 import HeaderAuth from "./HeaderAuth";
 import TextInput from "./Login/TextInput";
-import PasswordToggle from "./Login/PasswordToggle";
+import PasswordField from "./Login/PasswordField";
 import { handleLogin } from "../utils/authUtils";
 import "./AuthStyles.css";
-import PasswordField from "./Login/PasswordField";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -17,9 +14,14 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    handleLogin(username, password, navigate);
+    try {
+      // Ensure handleLogin correctly saves token and user data
+      await handleLogin(username, password, navigate);
+    } catch (error) {
+      toast.error("Login failed. Please try again.");
+    }
   };
 
   return (
@@ -39,7 +41,7 @@ const Login = () => {
         <PasswordField
           password={password}
           setPassword={setPassword}
-          label={"Enter You Password"}
+          label={"Enter Your Password"}
         />
         <div className="auth-keep-center">
           <input type="submit" className="auth-button" value="Login" />
@@ -48,6 +50,15 @@ const Login = () => {
           </Link>
         </div>
       </form>
+
+      <div className="auth-go-back">
+        <button
+          className="go-back-home-button"
+          onClick={() => navigate("/home")}
+        >
+          Home
+        </button>
+      </div>
       <Link to="/register" className="auth-link">
         Don't have an account? Register here
       </Link>

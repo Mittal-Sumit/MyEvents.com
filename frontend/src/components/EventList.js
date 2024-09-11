@@ -1,11 +1,10 @@
-/* src/components/EventList.js */
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../utils/axiosInstance";
 import { toast } from "react-toastify";
 import { Button, Typography } from "@mui/material";
 import EventListDataGrid from "./Event/EventListDataGrid";
-import { parseISO, isSameDay } from "date-fns";
 import { jwtDecode } from "jwt-decode";
+import dayjs from "dayjs"; // For date formatting
 import "./EventList.css";
 import { useNavigate } from "react-router-dom";
 
@@ -36,8 +35,8 @@ const EventList = () => {
 
     if (dateFilter) {
       filtered = filtered.filter((event) => {
-        const eventDate = parseISO(event.date);
-        return isSameDay(eventDate, new Date(dateFilter));
+        const eventDate = dayjs(event.date); // Using dayjs for date parsing
+        return eventDate.isSame(dayjs(dateFilter), "day");
       });
     }
 
@@ -53,7 +52,11 @@ const EventList = () => {
   const fetchEvents = async () => {
     try {
       const response = await axiosInstance.get("/events/");
-      setEvents(response.data);
+      const formattedEvents = response.data.map((event) => ({
+        ...event,
+        date: dayjs(event.date).format("YYYY-MM-DDTHH:mm"), // Format date in a standardized way
+      }));
+      setEvents(formattedEvents);
 
       const uniqueLocations = [
         ...new Set(response.data.map((event) => event.location)),
@@ -91,10 +94,7 @@ const EventList = () => {
         throw new Error("User is not authenticated");
       }
 
-      console.log("Token retrieved:", token);
-
       const decodedToken = jwtDecode(token);
-      console.log("Decoded token:", decodedToken);
       const loggedInUserId = decodedToken.user_id;
 
       const response = await axiosInstance.get(
@@ -126,8 +126,14 @@ const EventList = () => {
           Event List
         </Typography>
         <Button
+          sx={{
+            ":hover": {
+              bgcolor: "primary.main",
+              color: "white",
+            },
+          }}
           variant="contained"
-          color="primary"
+          color="transperent"
           className="back-to-home-button"
           onClick={() => navigate("/home")}
         >

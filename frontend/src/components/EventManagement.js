@@ -1,4 +1,3 @@
-/* src/components/EventManagement.js */
 import React, { useState, useEffect } from "react";
 import {
   Button,
@@ -12,8 +11,9 @@ import {
 import EventDataGrid from "./Event/EventDataGrid";
 import axiosInstance from "../utils/axiosInstance";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import dayjs from "dayjs"; // For date parsing and formatting
 import "./EventManagement.css";
-import { useNavigate } from "react-router-dom";
 
 const EventManagement = () => {
   const [events, setEvents] = useState([]);
@@ -29,7 +29,8 @@ const EventManagement = () => {
   const [locationFilter, setLocationFilter] = useState("");
   const [availableLocations, setAvailableLocations] = useState([]);
   const [dateFilter, setDateFilter] = useState("");
-  const navigate = useNavigate();
+
+  const navigate = useNavigate(); // Hook for navigation
 
   useEffect(() => {
     fetchEvents();
@@ -49,7 +50,11 @@ const EventManagement = () => {
   const fetchEvents = async () => {
     try {
       const response = await axiosInstance.get("/events/");
-      setEvents(response.data);
+      const formattedEvents = response.data.map((event) => ({
+        ...event,
+        date: dayjs(event.date).format("YYYY-MM-DDTHH:mm"), // Format the date correctly
+      }));
+      setEvents(formattedEvents);
 
       const uniqueLocations = [
         ...new Set(response.data.map((event) => event.location)),
@@ -82,7 +87,7 @@ const EventManagement = () => {
   const handleEditEvent = (event) => {
     setTitle(event.title);
     setDescription(event.description);
-    setDate(event.date);
+    setDate(dayjs(event.date).format("YYYY-MM-DDTHH:mm")); // Ensure the date is in the right format
     setLocation(event.location);
     setEditEventId(event.id);
     setOpenEventDialog(true);
@@ -130,17 +135,30 @@ const EventManagement = () => {
         <Typography variant="h4" className="page-title">
           Event Management
         </Typography>
+
+        {/* Go Back to Home Button */}
         <Button
-          variant="contained"
-          color="primary"
-          className="back-to-admin-button"
-          onClick={() => navigate("/admin-dashboard")}
+          sx={{
+            ":hover": {
+              bgcolor: "primary.main",
+              color: "white",
+            },
+          }}
+          color="white"
+          onClick={() => navigate("/home")}
+          style={{ marginRight: "10px" }}
         >
-          Back to Admin Dashboard
+          Go Back to Home
         </Button>
+
         <Button
-          variant="contained"
-          color="secondary"
+          sx={{
+            ":hover": {
+              bgcolor: "green",
+              color: "white",
+            },
+          }}
+          color="white"
           className="create-event-button"
           onClick={() => setOpenEventDialog(true)}
         >

@@ -4,6 +4,8 @@ from rest_framework import serializers
 from .models import Event
 
 class EventSerializer(serializers.ModelSerializer):
+    date = serializers.DateTimeField(format="%d %B %Y, %I:%M %p")  # Added custom format for date field
+
     class Meta:
         model = Event
         fields = '__all__'

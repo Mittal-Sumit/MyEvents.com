@@ -8,9 +8,12 @@ User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'password','role')
-        extra_kwargs = {'password': {'write_only': True},'role': {'read_only': True}}
-    
+        fields = ('id', 'username', 'email', 'password', 'role')
+        extra_kwargs = {
+            'password': {'write_only': True},
+            'role': {'read_only': True}  # Role is read-only unless Admin is updating
+        }
+
     def validate_username(self, value):
         if User.objects.filter(username=value).exists():
             raise serializers.ValidationError("A user with this username already exists.")
@@ -25,6 +28,17 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(**validated_data)
         return user
 
+    def update(self, instance, validated_data):
+        # Only admins can update the role of a user
+        request_user = self.context['request'].user
+        if 'role' in validated_data:
+            if request_user.role != 'admin':
+                raise serializers.ValidationError("Only admins can update the role.")
+            # Allow admin to update the role
+            instance.role = validated_data.get('role', instance.role)
+        return super().update(instance, validated_data)
+
+
 class PasswordResetSerializer(serializers.Serializer):
     email = serializers.EmailField()
 
@@ -32,6 +46,7 @@ class PasswordResetSerializer(serializers.Serializer):
         if not User.objects.filter(email=value).exists():
             raise serializers.ValidationError("No user with this email address exists.")
         return value
+
 
 # Custom serializer to include the user's role in the JWT token
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):

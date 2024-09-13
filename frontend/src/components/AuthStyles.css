@@ -1,17 +1,186 @@
-/* src/components/AuthStyles.css */
+/* General Page Settings */
 html,
 body {
-  background: #dcdddf url(https://cssdeck.com/uploads/media/items/7/7AF2Qzt.png);
-  color: #000;
+  background: #000; /* Black background for the whole page */
+  color: #fff; /* White text */
   font: 14px Arial, sans-serif;
   margin: 0;
   padding: 0;
   position: relative;
-  background-size: cover;
-  background-attachment: fixed;
   overflow-x: hidden;
 }
 
+/* Home Button Styling */
+.go-back-home-button-container {
+  position: absolute;
+  top: 10px; /* Adjust as needed for spacing */
+  left: 10px; /* Adjust as needed for spacing */
+  z-index: 10; /* Ensure it stays on top */
+}
+
+.go-back-home-button {
+  background-color: transparent;
+  border: solid 2px #fff; /* White border */
+  color: #fff; /* White text */
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.go-back-home-button:hover {
+  background-color: #333; /* Darker background on hover */
+}
+
+/* Auth Container */
+.auth-container {
+  background: #000; /* Black background for the container */
+  color: #fff; /* White text */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #333; /* Darker border */
+  margin: 60px auto;
+  padding: 30px;
+  text-align: center;
+  width: 90%;
+  max-width: 450px;
+  border-radius: 12px;
+  position: relative;
+  animation: fadeIn 1s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-color: white;
+}
+
+/* Input Fields */
+.auth-input {
+  border-radius: 5px;
+  box-shadow: 0 1px 0 #000, 0 -2px 5px rgba(0, 0, 0, 0.08) inset;
+  background: #333; /* Dark gray background for input */
+  border: 1px solid #444; /* Slightly darker border */
+  color: #fff; /* White text */
+  font: 14px Helvetica, Arial, sans-serif;
+  margin: 0 0 15px;
+  padding: 15px 10px;
+  width: 300px; /* Increased width to 80% */
+  max-width: 500px; /* Add a maximum width for larger screens */
+  transition: all 0.3s ease;
+  display: block; /* Ensures it stays block-level */
+  margin-left: auto; /* Center horizontally */
+  margin-right: auto; /* Center horizontally */
+}
+
+.auth-input:focus {
+  box-shadow: 0 0 3px #fff inset;
+  background-color: #444; /* Slightly lighter dark gray input on focus */
+  border: 1px solid #fff; /* White border on focus */
+  outline: none;
+}
+
+/* Password Container */
+.password-field {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.password-container {
+  position: relative;
+}
+
+.toggle-login-password {
+  position: absolute;
+  right: 10px; /* Adjusted for better placement */
+  top: 30px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  color: #fff; /* White color for the eye icon */
+}
+
+/* Buttons */
+.auth-button {
+  width: 80%; /* Ensure the button width matches the input fields */
+  max-width: 500px;
+  border-radius: 30px;
+  border: 1px solid #fff; /* White border */
+  color: #000; /* Black text */
+  cursor: pointer;
+  font: bold 15px Helvetica, Arial, sans-serif;
+  height: 40px;
+  background: #fff; /* White background */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 15px auto; /* Center the button horizontally */
+}
+.auth-button:hover {
+  background-color: #f0f0f0; /* Light gray background on hover */
+  color: #000; /* Black text on hover */
+}
+
+/* Link Styling */
+.auth-link {
+  color: #fff; /* White text */
+  font-size: 14px;
+  text-decoration: none;
+  margin-top: 20px;
+  display: inline-block;
+  text-align: center; /* Center align the links */
+}
+
+.auth-link:hover {
+  color: #ccc; /* Light gray text on hover */
+}
+
+/* Align "Forgot Password" and "Login/Register" buttons */
+.auth-keep-center {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.forgot-password-link {
+  margin-top: 10px;
+  display: inline-block;
+  text-align: center;
+  width: 100%; /* Ensure it stretches across the form */
+}
+
+/* Responsive Settings for Smaller Screens */
+@media (max-width: 600px) {
+  .auth-container {
+    width: 95%;
+    padding: 20px;
+    margin-top: 30px; /* Reduced top margin for smaller screens */
+  }
+
+  .auth-button {
+    font-size: 14px;
+  }
+
+  .toggle-login-password {
+    right: 5px; /* Adjust icon position for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-input {
+    padding: 12px 8px; /* Slightly smaller padding */
+    font-size: 13px; /* Smaller font size */
+  }
+
+  .auth-button {
+    padding: 10px;
+    font-size: 13px; /* Smaller font size */
+    width: 100%; /* Full width buttons */
+  }
+
+  .auth-link {
+    font-size: 12px; /* Smaller font size for links */
+  }
+}
+
+/* Fade-in animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -21,169 +190,21 @@ body {
   }
 }
 
-.auth-input {
-  border-radius: 5px;
-  box-shadow: 0 1px 0 #fff, 0 -2px 5px rgba(0, 0, 0, 0.08) inset;
-  background: #fff;
-  border: 1px solid #c8c8c8;
-  color: #333;
-  font: 14px Helvetica, Arial, sans-serif;
-  margin: 0 0 15px;
-  padding: 15px 10px;
-  width: 85%;
-  transition: all 0.3s ease;
-}
-
-.auth-input:focus {
-  box-shadow: 0 0 3px #4caf50 inset;
-  background-color: #f0f0f0;
-  border: 1px solid #4caf50;
-  outline: none;
-}
-
-/* Buttons */
-.auth-button,
-.auth-link-button {
-  border-radius: 30px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;
-  border: 1px solid #d69e31;
-  color: #fff;
-  cursor: pointer;
-  font: bold 15px Helvetica, Arial, sans-serif;
-  height: 40px;
-  width: 140px;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
-  margin: 20px 10px 10px 0;
-  background: #4caf50;
-  transition: background-color 0.3s ease;
-}
-
-.auth-button:hover,
-.auth-link-button:hover {
-  background-color: #45a049;
-}
-
-/* Forgot Password Button */
-.auth-link-button {
-  background: #fff;
-  color: #4caf50;
-  border: 1px solid #4caf50;
-}
-
-.auth-link-button:hover {
-  background: #5e5e5e;
-}
-
-/* Link Styling */
-.auth-link {
-  color: #4caf50;
-  font-size: 14px;
-  text-decoration: none;
-  margin-top: 20px;
-  display: inline-block;
-}
-
-.auth-link:hover {
-  color: #388e3c;
-  text-decoration: none;
-}
-
-/* Forgot Password Link */
-.forgot-password-link {
-  font-size: 12px;
-  color: #4caf50;
-  margin-left: 10px;
-  text-decoration: none;
-}
-
-.forgot-password-link:hover {
-  color: #388e3c;
-  text-decoration: none;
-}
-
-.password-field {
-  position: relative;
-  width: 100%;
-}
-
-.toggle-password {
-  position: absolute;
-  right: 31px;
-  top: 44%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  font-size: 18px;
-  color: #4caf50;
-}
-
-.toggle-password:hover {
-  color: #388e3c;
-}
-
-.toggle-login-password {
-  position: absolute;
-  right: 30px;
-  top: 42%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  font-size: 18px;
-  color: #4caf50;
-  background-color: transparent;
-}
-
+/* Password Strength Bar */
 .password-strength-container {
-  width: 85%;
-  margin-top: -10px;
-  margin-bottom: 10px;
-  margin-left: 30px;
-}
-
-.auth-keep-center {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   margin-top: 10px;
 }
 
-.auth-go-back {
-  position: absolute;
-  top: 10px; /* Adjust as needed for spacing */
-  right: 0px; /* Align to the right */
-  z-index: 10; /* Ensure it stays on top */
+/* Adjust spacing for password field */
+.password-field {
+  margin-bottom: 20px;
 }
+@media (max-width: 600px) {
+  .auth-input {
+    width: 90%; /* Wider fields on mobile */
+  }
 
-.go-back-home-button {
-  background-color: transparent;
-  border: solid green;
-  color: black;
-  padding: 10px 20px;
-  font-size: 14px;
-  border-radius: 15px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.go-back-home-button:hover {
-  background-color: #45a049;
-}
-
-/* Other existing styles */
-.auth-container {
-  background: rgb(225, 225, 225);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid #c4c6ca;
-  margin: 60px auto;
-  padding: 30px;
-  text-align: center;
-  width: 450px;
-  border-radius: 12px;
-  position: relative;
-  animation: fadeIn 1s ease-in-out;
-}
-
-.auth-container h5 {
-  color: #4a4a4a;
-  font: bold 26px Helvetica, Arial, sans-serif;
-  letter-spacing: -0.05em;
-  margin: 20px 0 30px;
+  .auth-button {
+    width: 90%; /* Wider button on mobile */
+  }
 }

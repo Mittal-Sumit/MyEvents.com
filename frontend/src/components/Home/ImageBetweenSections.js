@@ -1,10 +1,17 @@
-/* src/components/Home/ImageBetweenSection.js */
 import React from "react";
+import "./ImageBetweenSections.css";
 
 const ImageBetweenSections = () => {
   return (
-    <div className="image-between-section">
-      <img src="/Final.jpg" alt="Ending Section" className="end-page-image" />
+    <div className="fullscreen-image-section">
+      <div className="fullscreen-overlay">
+        <img
+          src="/Final.jpg"
+          alt="Ending Section"
+          className="fullscreen-image"
+        />
+        <div className="image-overlay-text"></div>
+      </div>
     </div>
   );
 };

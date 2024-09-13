@@ -1,7 +1,6 @@
-/* src/components/Sidebar.css */
 /* Main Sidebar */
 .main-sidebar {
-  width: 200px;
+  width: 250px;
   height: 100%;
   position: fixed;
   top: 0;
@@ -11,13 +10,13 @@
   transition: transform 0.3s ease;
   transform: translateX(-100%);
   padding-top: 50px;
+  z-index: 999;
 }
 
 .main-sidebar.open {
   transform: translateX(0);
 }
 
-/* Sidebar Navigation */
 .sidebar-nav {
   padding: 0;
   margin: 0;
@@ -29,9 +28,8 @@
   margin: 0;
 }
 
-/* Sidebar Item */
 .sidebar-item {
-  padding: 10px;
+  padding: 15px;
   text-align: center;
   border-bottom: 1px solid #ccc;
   cursor: pointer;
@@ -39,4 +37,61 @@
 
 .sidebar-item:hover {
   background-color: #ddd;
+}
+
+/* Burger Menu */
+.burger-menu-s {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #ffffff;
+  z-index: 2000;
+  transition: color 0.3s ease, font-size 0.3s ease;
+  padding: 0px;
+}
+
+/* Media Queries for Burger Menu and Sidebar Responsiveness */
+@media (max-width: 1024px) {
+  .burger-menu-s {
+    font-size: 24px;
+    top: 12px;
+    left: 12px;
+  }
+
+  .main-sidebar {
+    width: 220px; /* Narrower sidebar on smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .burger-menu-s {
+    font-size: 22px;
+    top: 10px;
+    left: 10px;
+  }
+
+  .main-sidebar {
+    width: 200px; /* Further narrow the sidebar */
+  }
+}
+
+@media (max-width: 480px) {
+  .burger-menu-s {
+    font-size: 20px;
+    top: 8px;
+    left: 8px;
+  }
+
+  .main-sidebar {
+    width: 180px; /* Very narrow sidebar for mobile screens */
+  }
+
+  .sidebar-item {
+    font-size: 14px; /* Reduce font size on smaller screens */
+    padding: 10px; /* Smaller padding for mobile */
+  }
 }

@@ -26,7 +26,7 @@ const Header = ({ toggleSidebar }) => {
 
   return (
     <header className="header">
-      <button className="burger-menu" onClick={toggleSidebar}>
+      <button className="burger-menu-h" onClick={toggleSidebar}>
         ☰
       </button>
       <h1 className="site-title">MyEvent.com</h1>

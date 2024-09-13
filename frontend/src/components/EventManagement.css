@@ -1,6 +1,6 @@
 /* src/components/EventManagement.css */
 .event-management-page {
-  background-color: beige;
+  background-color: white;
   padding: 0px 20px;
   min-height: 100vh;
   display: flex;
@@ -16,11 +16,12 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  background-color: #333;
+  background-color: black;
   color: white;
   padding: 10px 20px;
   border-radius: 0px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 .page-title {
@@ -57,6 +58,7 @@
 
 .search-bar {
   width: 300px;
+  color: white;
 }
 
 .date-filter {
@@ -71,10 +73,11 @@
   width: 100%;
   max-height: 71vh;
   overflow: auto;
-  background-color: #ffffff;
+  background-color: black;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   border-radius: 0px;
   padding: 20px;
+  color: white;
 }
 
 .event-button {

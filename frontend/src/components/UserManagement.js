@@ -135,7 +135,7 @@ const UserManagement = () => {
         </TextField>
       </div>
 
-      <div className="datagrid-container">
+      <div className="datagrid-container-um">
         <DataGrid
           rows={filteredUsers}
           columns={columns}

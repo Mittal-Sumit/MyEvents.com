@@ -1,27 +1,12 @@
-/* src/components/Home.css */
+/* General Body Styling */
 body {
-  background-color: #ffffff;
-  color: black;
+  background-color: black;
+  color: white;
   font-family: "Roboto", sans-serif;
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100%;
-}
-
-.main-header {
-  background-image: url(C:\Users\susha\OneDrive\Desktop\MyEvent.com\frontend\public\concert.jpg);
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  color: transparent;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  width: 100%;
-  box-sizing: border-box;
+  min-height: 100vh; /* Ensures the body always covers full height of viewport */
 }
 
 .main-header h1 {
@@ -29,43 +14,7 @@ body {
   margin: 0;
 }
 
-.logout-button {
-  font-size: large;
-  position: fixed;
-  right: 40px;
-  padding: 10px 20px;
-  background-color: transparent;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-weight: bold;
-  margin-right: 0px;
-}
-
-.logout-button:hover {
-  background-color: red;
-}
-
-.burger-menu {
-  font-size: 24px;
-  cursor: pointer;
-  background: none;
-  border: none;
-  color: #ffffff;
-  margin: 5px;
-  position: fixed;
-  top: 5px;
-  z-index: 2000;
-  transition: color 0.3s ease;
-  padding: 0px;
-}
-
-.burger-menu.highlight {
-  color: #cccccc;
-}
-
+/* Sidebar Styling */
 .main-sidebar {
   background-color: black;
   color: #f0f0f0;
@@ -86,38 +35,28 @@ body {
   transform: translateX(-100%);
 }
 
-.small-image-container {
-  text-align: center;
-  margin: 0px;
-  padding: 60px;
-  background-color: #f5f5f5;
-  height: 140vh;
-}
-
-.small-image {
-  width: 400px;
-  height: auto;
-  border-radius: 8px;
-}
+/* About Us Section */
 .about-us-section {
-  background-color: #f5f5f5;
-  color: #333;
-  padding: 50px 0;
+  background-color: black;
+  color: white;
+  padding: 180px 0;
   text-align: center;
-  height: 100vh;
+  height: 70vh;
+  border-radius: 100px;
 }
 
 .about-us-section h2 {
   font-family: "Segoe UI", Arial, sans-serif;
   font-weight: 400;
   margin: 10px 0;
-  font-size: 2em;
+  font-size: 4em;
   margin-bottom: 20px;
+  color: white;
 }
 
 .about-us-sub {
   font-style: italic;
-  font-family: "Lato", sans-serif;
+  font-family: "Segoe UI", Arial, sans-serif;
   padding-bottom: 20px;
 }
 
@@ -125,14 +64,58 @@ body {
   font-size: 1.2em;
   margin: 0 auto;
   max-width: 600px;
-  color: #333;
+  color: white;
 }
+
+/* Media Queries for Responsive Layout */
+
+/* Tablets and Smaller Screens */
+@media (max-width: 768px) {
+  .about-us-section {
+    padding: 40px 0;
+    height: auto; /* Adjust height for smaller screens */
+    border-radius: 50px; /* Less rounded on smaller screens */
+  }
+
+  .about-us-section h2 {
+    font-size: 3em; /* Adjust font size for tablets */
+  }
+
+  .about-us-section p {
+    font-size: 1.1em;
+    max-width: 90%; /* Reduce text block width for tablets */
+  }
+}
+
+/* Mobile Phones */
+@media (max-width: 480px) {
+  .about-us-section {
+    padding: 30px 0;
+    height: auto; /* Adjust height for mobile */
+    border-radius: 20px; /* Further reduce rounding */
+  }
+
+  .about-us-section h2 {
+    font-size: 2em; /* Further adjust font size for mobile */
+  }
+
+  .about-us-section p {
+    font-size: 1em;
+    max-width: 90%; /* Reduce the width of the text block further */
+  }
+
+  .about-us-sub {
+    font-size: 1em;
+  }
+}
+
+/* Main Content */
 .main-content {
+  flex: 1; /* Pushes footer down */
   font-family: "Raleway", sans-serif;
   padding: 20px;
   margin: 0px;
   background-color: black;
-  height: 130vh;
   color: white;
   transition: filter 0.3s ease;
   text-align: center;
@@ -141,25 +124,36 @@ body {
   border-radius: 0px;
 }
 
-.blur-background .main-content {
-  filter: blur(5px);
-}
-
+/* Footer */
 .main-footer {
   background-color: black;
   color: white;
-  padding: 10px;
+  padding: 10px 20px;
   text-align: center;
   width: 100%;
-  position: relative;
   box-sizing: border-box;
+  font-size: 16px;
+  margin-top: 20px;
+  position: relative; /* Ensure it's not fixed, so it follows content */
 }
 
+.footer-contact-info {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.footer-contact-info p {
+  margin: 5px 0;
+}
+
+/* Event Grid */
 .event-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
   justify-items: center;
+  margin-bottom: 20px; /* Add some space at the bottom */
 }
 
 @media (max-width: 1024px) {
@@ -174,27 +168,47 @@ body {
   }
 }
 
-.view-all-events {
-  margin-top: 20px;
+/* Fullscreen Image Header */
+.fullscreen-image-header {
+  background-image: url("C:/Users/susha/OneDrive/Desktop/MyEvent.com/frontend/public/concert.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  font-size: 48px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Responsive Adjustments for Fullscreen Image */
+@media (max-width: 768px) {
+  .fullscreen-image-header {
+    height: 80vh;
+    font-size: 36px;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fullscreen-image-header {
+    height: 60vh;
+    font-size: 24px;
+    padding: 10px;
+  }
+}
+
+/* Image Between Section */
+.image-between-section {
+  width: 100%;
+  height: auto;
   text-align: center;
 }
 
-.view-all-link {
-  background-color: navy;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1em;
-  border: 1px solid navy;
-  padding: 10px 20px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.view-all-link:hover {
-  background-color: black;
-  color: #ffffff;
-}
+/* Slick Slider Styles */
 .slick-slider {
   margin-top: 200px;
 }
@@ -210,24 +224,6 @@ body {
   bottom: 300px;
   margin-top: 20px;
   text-align: center;
-}
-
-.slick-dots li button:before {
-  color: #4caf50;
-}
-
-.slick-dots li.slick-active button:before {
-  color: #388e3c;
-}
-
-.home-page {
-  background-color: white;
-  color: #000;
-  font-family: "Roboto", sans-serif;
-  padding: 0px;
-  margin: 0px;
-  width: 100%;
-  height: 100%;
 }
 
 .slick-prev,
@@ -269,8 +265,28 @@ body {
   opacity: 0.5;
   pointer-events: none;
 }
-.fullscreen-image-header {
-  background-image: url("C:\Users\susha\OneDrive\Desktop\MyEvent.com\frontend\public\concert.jpg");
+
+.view-all-link {
+  background-color: white; /* White background */
+  color: black; /* Black font color */
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1em;
+  border: 2px solid black; /* Add a border */
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease;
+  display: inline-block;
+}
+
+.view-all-link:hover {
+  background-color: black; /* Background turns black on hover */
+  color: white; /* Text turns white on hover */
+  border-color: white; /* Border turns white on hover */
+}
+
+.end-page-image {
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -284,21 +300,19 @@ body {
   z-index: 1;
 }
 
-.home-page {
-  position: relative;
-  z-index: 0;
+/* Responsive Adjustments for Fullscreen Image */
+@media (max-width: 768px) {
+  .fullscreen-image-header {
+    height: 80vh;
+    font-size: 36px;
+    padding: 20px;
+  }
 }
 
-.image-between-section {
-  width: 100%;
-  height: auto;
-  text-align: center;
-}
-
-.end-page-image {
-  width: 100%;
-  height: auto;
-  max-height: 800px;
-  object-fit: cover;
-  border-radius: 0px;
+@media (max-width: 480px) {
+  .fullscreen-image-header {
+    height: 60vh;
+    font-size: 24px;
+    padding: 10px;
+  }
 }

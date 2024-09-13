@@ -1,4 +1,3 @@
-/* src/components/Home.js */
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axiosInstance from "../utils/axiosInstance";
@@ -9,19 +8,23 @@ import WhatWeOffer from "./Home/WhatWeOffer";
 import AboutUsSection from "./Home/AboutUsSection";
 import ImageBetweenSections from "./Home/ImageBetweenSections";
 import EventCard from "./Home/EventCard";
-import ReactJoyride from "react-joyride";
-import { joyrideSteps } from "./joyrideSteps";
 import "./Home.css";
 
 const Home = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [showJoyride, setShowJoyride] = useState(false);
   const [events, setEvents] = useState([]);
   const [role, setRole] = useState(null); // Track user role
   const navigate = useNavigate();
-  const headerRef = useRef(null);
-  const contentRef = useRef(null);
+  const upcomingEventsRef = useRef(null); // For upcoming events section
   const footerRef = useRef(null);
+
+  const sections = useRef([]); // Collect all sections
+
+  const addToSections = (el) => {
+    if (el && !sections.current.includes(el)) {
+      sections.current.push(el);
+    }
+  };
 
   const handleLogout = () => {
     sessionStorage.removeItem("accessToken");
@@ -34,8 +37,8 @@ const Home = () => {
   };
 
   const handleClickOutside = (event) => {
-    const sidebar = document.querySelector(".main-sidebar");
-    const burgerMenu = document.querySelector(".burger-menu");
+    const sidebar = document.querySelector(".burger-menu-h");
+    const burgerMenu = document.querySelector(".burger-menu-h");
     if (
       isSidebarOpen &&
       sidebar &&
@@ -59,13 +62,9 @@ const Home = () => {
   }, [isSidebarOpen]);
 
   useEffect(() => {
-    const isFirstLogin = true;
-    if (isFirstLogin) {
-      setShowJoyride(true);
-    }
-
-    fetchUserRole(); // Fetch user role after login
+    fetchUserRole();
     fetchUpcomingEvents();
+    applyIntersectionObserver();
   }, []);
 
   const fetchUserRole = async () => {
@@ -86,10 +85,44 @@ const Home = () => {
     }
   };
 
+  const applyIntersectionObserver = () => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          } else {
+            entry.target.classList.remove("visible");
+          }
+        });
+      },
+      { threshold: 0.1 } // Trigger when 10% of the element is visible
+    );
+
+    sections.current.forEach((section) => {
+      if (section) {
+        observer.observe(section);
+      }
+    });
+
+    return () => {
+      sections.current.forEach((section) => {
+        if (section) observer.unobserve(section);
+      });
+    };
+  };
+
   const scrollToSection = (ref) => {
-    if (ref.current) {
+    if (ref && ref.current) {
       ref.current.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   const handleNavigation = (path) => {
@@ -112,20 +145,24 @@ const Home = () => {
       >
         <Sidebar
           role={role}
-          navigateTo={(path) => handleNavigation(path)} // Redirect user based on role
-          scrollToHeader={() => scrollToSection(headerRef)}
-          scrollToContent={() => scrollToSection(contentRef)}
+          navigateTo={(path) => handleNavigation(path)}
+          scrollToHeader={scrollToTop} // Use scrollToTop for "Home" button
+          scrollToContent={() => scrollToSection(upcomingEventsRef)} // Scroll to upcoming events
           scrollToFooter={() => scrollToSection(footerRef)}
         />
       </div>
 
-      <div className="fullscreen-image-header" ref={headerRef}></div>
+      <div className="fullscreen-image-header" ref={addToSections}></div>
 
-      <AboutUsSection />
+      <div ref={addToSections}>
+        <AboutUsSection />
+      </div>
 
-      <WhatWeOffer />
+      <div ref={addToSections}>
+        <WhatWeOffer />
+      </div>
 
-      <div className="main-content" ref={contentRef}>
+      <div className="main-content" ref={upcomingEventsRef}>
         <h1>Upcoming Events</h1>
         <div className="event-grid">
           {events.map((event) => (
@@ -139,21 +176,13 @@ const Home = () => {
         </div>
       </div>
 
-      <ImageBetweenSections />
+      <div ref={addToSections}>
+        <ImageBetweenSections />
+      </div>
 
       <div ref={footerRef}>
         <Footer />
       </div>
-
-      {showJoyride && (
-        <ReactJoyride
-          steps={joyrideSteps}
-          continuous={true}
-          scrollToFirstStep={false}
-          showSkipButton={true}
-          showProgress={true}
-        />
-      )}
     </div>
   );
 };

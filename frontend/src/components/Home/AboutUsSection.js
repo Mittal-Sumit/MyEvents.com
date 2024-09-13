@@ -4,33 +4,48 @@ import React from "react";
 const AboutUsSection = () => {
   return (
     <div className="small-image-container">
-      <img src="/TheLogo.jpg" alt="Logo" className="small-image" />
-
       <div className="about-us-section">
         <h2>THE MY EVENT STORY</h2>
         <p className="about-us-sub">
-          <i>Plan Your Day</i>
+          <i>Plan Your Day, Create Memories! 🎉</i>
         </p>
         <p>
-          MyEvent.com began as a small passion project during a casual coffee
-          chat between two friends who loved attending events but found it
-          difficult to discover the right ones. With a shared vision, they
-          dreamed of creating a platform that would bring people closer to the
-          events that matter most to them—whether it's a live concert, a charity
-          run, or an intimate workshop. In 2021, armed with little more than
-          determination and a belief in the power of human connection,
-          MyEvent.com was born. What started as a simple event listing site
-          quickly grew as users began sharing their love for unique experiences.
-          Our community rapidly expanded, and we knew we were onto something
-          bigger. Where We Are Now Today, MyEvent.com is more than just a
-          platform—it's a destination for discovering moments that spark joy,
-          learning, and connection. We've grown into a vibrant ecosystem that
-          helps thousands of people find, register for, and engage with events
-          in ways they’ve never experienced before. Our platform features
-          everything from concerts and festivals to corporate networking events,
-          workshops, and beyond. We also offer personalized event
-          recommendations based on your interests, making it easier for you to
-          find what you're passionate about.{" "}
+          It all started with a simple coffee chat ☕ between two friends. Both
+          were avid event-goers who found themselves struggling to keep track of
+          the coolest events happening around them. So they had a lightbulb
+          moment 💡—what if they created a space where anyone could easily
+          discover amazing events that matched their interests? 🎯 And that’s
+          how MyEvent.com was born.
+        </p>
+        <p>
+          From intimate workshops 🎨 to packed concerts 🎶, from charity runs 🏃‍♂️
+          to professional conferences 💼—MyEvent.com connects you with
+          experiences that move you. Our vision was always bigger than just
+          listing events; we wanted to build a community where every user feels
+          excited about their next adventure. Whether you’re here for a fun
+          weekend or to grow your professional network, we’ve got something for
+          everyone!
+        </p>
+        <p>
+          Today, we’ve grown into a platform where thousands of users find and
+          book events daily. We've made it easy for you to browse by category,
+          location, and even mood! Looking for something energetic to do on the
+          weekend? 🎉 We've got music festivals, sports events, and parties.
+          Prefer something more laid-back? Check out our art galleries 🖼️, book
+          clubs 📚, and cooking classes 🍳. Whatever your vibe, MyEvent.com is
+          here to match it.
+        </p>
+        <p>
+          And the best part? We offer personalized recommendations tailored just
+          for you! So whether you’re an adventure seeker 🏞️, a social butterfly
+          🦋, or someone who loves cozy indoor events 🌿, we’ll help you find it
+          all. Join our growing community, and let's make every moment count.
+          Because at MyEvent.com, it’s not just about attending events, it’s
+          about creating memories that last a lifetime! 🌟
+        </p>
+        <p>
+          So, what are you waiting for? Explore, experience, and enjoy with
+          MyEvent.com! 🎊
         </p>
       </div>
     </div>

@@ -32,8 +32,7 @@ const ResetPassword = () => {
 
   return (
     <div className="auth-container">
-      <HeaderAuth />
-      <div className="auth-go-back">
+      <div className="go-back-home-button-container">
         <button
           className="go-back-home-button"
           onClick={() => navigate("/home")}
@@ -41,6 +40,7 @@ const ResetPassword = () => {
           Home
         </button>
       </div>
+      <HeaderAuth />
       <Typography variant="h5" gutterBottom>
         Reset Password
       </Typography>

@@ -1,4 +1,3 @@
-// src/components/GuestListPopup.js
 import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import {
@@ -86,6 +85,12 @@ const GuestListPopup = ({ eventId, handleClose }) => {
   }
 
   const guestColumns = [
+    {
+      field: "serialNumber",
+      headerName: "S.No",
+      width: 90,
+      renderCell: (params) => params.api.getAllRowIds().indexOf(params.id) + 1, // Serial number logic
+    },
     { field: "guest_name", headerName: "Guest Name", width: 200 },
     { field: "email", headerName: "Email", width: 250 },
     { field: "status", headerName: "Status", width: 150 },
@@ -117,7 +122,12 @@ const GuestListPopup = ({ eventId, handleClose }) => {
 
   return (
     <Dialog open={true} onClose={handleClose} fullWidth maxWidth="md">
-      <DialogTitle>
+      <DialogTitle
+        sx={{
+          backgroundColor: "#f5f5f5", // Light grey background for contrast
+          color: "#000", // Black text for visibility
+        }}
+      >
         <Typography variant="h5">Guest List</Typography>
       </DialogTitle>
       <DialogContent>

@@ -1,0 +1,30 @@
+.guestlist-page {
+  background-color: black;
+  color: white;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+h4 {
+  color: white;
+}
+
+.filter-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-bar,
+.location-filter,
+.date-filter {
+  background-color: white; /* White filter fields */
+  color: black; /* Black text in filters */
+  border-radius: 8px;
+}
+
+.datagrid-container {
+  background-color: white; /* White background for the DataGrid */
+  border-radius: 8px;
+  color: black; /* Black text in the DataGrid */
+}

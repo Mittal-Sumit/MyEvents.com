@@ -1,4 +1,3 @@
-/* src/components/Profile.js */
 import React, { useState, useEffect } from "react";
 import {
   Button,
@@ -8,16 +7,21 @@ import {
   DialogContent,
   DialogTitle,
   TextField,
+  Tooltip,
 } from "@mui/material";
 import axiosInstance from "../utils/axiosInstance";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import PasswordField from "./Login/PasswordField";
-import "./AuthStyles.css";
+import PasswordField from "./Login/PasswordField"; // Using the password field component
+import "./Profile.css"; // Importing the updated CSS
 
 const Profile = () => {
   const [userData, setUserData] = useState({ username: "", email: "" });
-  const [editData, setEditData] = useState({ username: "", email: "" });
+  const [editData, setEditData] = useState({
+    username: "",
+    email: "",
+    password: "", // Password field will now be mandatory for updates
+  });
   const [newPassword, setNewPassword] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -34,18 +38,52 @@ const Profile = () => {
       setUserData(response.data);
     } catch (error) {
       toast.error("Failed to load profile data.");
+      console.error("Error fetching profile:", error);
     }
   };
 
   const handleProfileUpdate = async () => {
+    // Create an object that will store the updates
+    const updates = {};
+
+    // Only add fields that have changed (not empty)
+    if (editData.username && editData.username !== userData.username) {
+      updates.username = editData.username;
+    }
+    if (editData.email && editData.email !== userData.email) {
+      updates.email = editData.email;
+    }
+
+    // If no fields have changed, show a message and return
+    if (Object.keys(updates).length === 0) {
+      toast.error("No changes detected.");
+      return;
+    }
+
     try {
-      await axiosInstance.put("/users/me/", editData);
+      console.log("Sending update request with data:", updates);
+
+      // Send a PATCH request with the updated fields
+      const response = await axiosInstance.patch("/users/me/", updates);
+
+      console.log("Update response:", response.data); // Log the response
       toast.success("Profile updated successfully.");
-      setUserData(editData);
+      setUserData({ ...userData, ...updates }); // Update userData with the correct fields
       setOpenEditModal(false);
+
+      // After updating, log the user out
+      handleLogout();
     } catch (error) {
+      console.error("Failed to update profile:", error); // Log the error for debugging
       toast.error("Failed to update profile.");
     }
+  };
+
+  // Logout function to clear session and navigate to login
+  const handleLogout = () => {
+    sessionStorage.removeItem("accessToken");
+    sessionStorage.removeItem("refreshToken");
+    navigate("/login");
   };
 
   const handlePasswordChange = async () => {
@@ -55,18 +93,20 @@ const Profile = () => {
     }
 
     try {
-      await axiosInstance.post("/users/change-password/", {
+      const response = await axiosInstance.post("/users/change-password/", {
         old_password: oldPassword,
         new_password: newPassword,
       });
       toast.success("Password updated successfully.");
+      handleLogout();
     } catch (error) {
       toast.error("Failed to update password.");
+      console.error("Password change error:", error);
     }
   };
 
   const handleEditButtonClick = () => {
-    setEditData(userData);
+    setEditData({ ...userData, password: "" }); // Initialize password field as empty
     setOpenEditModal(true);
   };
 
@@ -75,25 +115,25 @@ const Profile = () => {
   };
 
   const handleBackToHome = () => {
-    // Simply navigate to Home for all users
     navigate("/home");
   };
 
   return (
     <div className="auth-container">
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="h5" className="auth-title">
         Profile
       </Typography>
 
-      <Typography variant="body1">
-        <strong>Username:</strong> {userData.username}
-      </Typography>
-      <Typography variant="body1">
-        <strong>Email:</strong> {userData.email}
-      </Typography>
+      <div className="profile-info">
+        <Typography variant="body1">
+          <strong>Username:</strong> {userData.username}
+        </Typography>
+        <Typography variant="body1">
+          <strong>Email:</strong> {userData.email}
+        </Typography>
+      </div>
 
       <Button
-        sx={{ marginRight: 15 }}
         variant="contained"
         className="auth-button"
         onClick={handleEditButtonClick}
@@ -102,31 +142,42 @@ const Profile = () => {
       </Button>
 
       <Button
-        sx={{ color: "black" }}
+        variant="outlined"
         className="auth-button"
         onClick={handleBackToHome}
       >
         Back to Home
       </Button>
 
-      <Typography variant="h5" style={{ marginTop: "20px" }}>
+      <Typography variant="h6" className="auth-subtitle">
         Change Password
       </Typography>
-      <PasswordField
-        password={oldPassword}
-        setPassword={setOldPassword}
-        customLabel="Old Password"
-      />
-      <PasswordField
-        password={newPassword}
-        setPassword={setNewPassword}
-        customLabel="New Password"
-      />
-      <PasswordField
-        password={confirmPassword}
-        setPassword={setConfirmPassword}
-        customLabel="Confirm New Password"
-      />
+
+      <div className="password-change-fields">
+        <div>
+          <PasswordField
+            password={oldPassword}
+            setPassword={setOldPassword}
+            customLabel="Old Password"
+          />
+        </div>
+
+        <div>
+          <PasswordField
+            password={newPassword}
+            setPassword={setNewPassword}
+            customLabel="New Password"
+          />
+        </div>
+
+        <div>
+          <PasswordField
+            password={confirmPassword}
+            setPassword={setConfirmPassword}
+            customLabel="Confirm New Password"
+          />
+        </div>
+      </div>
 
       <Button
         variant="contained"
@@ -137,7 +188,14 @@ const Profile = () => {
       </Button>
 
       <Dialog open={openEditModal} onClose={handleCloseEditModal}>
-        <DialogTitle>Edit Profile</DialogTitle>
+        <DialogTitle
+          sx={{
+            backgroundColor: "#f5f5f5", // Light grey background for contrast
+            color: "#000", // Black text for visibility
+          }}
+        >
+          Edit Profile
+        </DialogTitle>
         <DialogContent>
           <TextField
             label="Username"
@@ -158,6 +216,11 @@ const Profile = () => {
             onChange={(e) =>
               setEditData({ ...editData, email: e.target.value })
             }
+          />
+          <PasswordField
+            password={editData.password}
+            setPassword={(password) => setEditData({ ...editData, password })}
+            customLabel="Password (required)"
           />
         </DialogContent>
         <DialogActions>

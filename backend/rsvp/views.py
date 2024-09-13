@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from events.serializers import EventSerializer
 from rest_framework.decorators import action
 from rest_framework.exceptions import PermissionDenied
-
+from notifications.models import Notification  # Import Notification model
 
 
 class RSVPListCreateView(generics.ListCreateAPIView):
@@ -93,6 +93,13 @@ class RegisterForEventView(generics.CreateAPIView):
 
         
         rsvp = RSVP.objects.create(user=user, event=event, status='attending')
+        if rsvp:
+        # Trigger immediate notification
+            Notification.objects.create(
+                user=user,
+                event=event,
+                message=f"You have successfully registered for '{event.title}' happening on {event.date}."
+        )
 
         
         GuestList.objects.create(

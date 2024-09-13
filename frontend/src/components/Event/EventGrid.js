@@ -1,4 +1,3 @@
-/* src/components/Event/EventGrid.js */
 import React, { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import {
@@ -25,7 +24,7 @@ const EventGrid = ({
   setLocationFilter,
   availableLocations,
   onEdit,
-  onDelete,
+  onDelete, // onDelete passed from EventManagement
   registeredEvents,
   handleRegister,
   handleRSVP,
@@ -33,35 +32,34 @@ const EventGrid = ({
   showActions = true,
   isListMode = false,
 }) => {
-  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
-  const [eventToDelete, setEventToDelete] = useState(null);
+  const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
-  const handleDeleteClick = (eventId) => {
-    setEventToDelete(eventId);
-    setOpenDeleteDialog(true);
+  const handleDetailsClick = (event) => {
+    setSelectedEvent(event);
+    setOpenDetailsDialog(true);
   };
 
-  const handleConfirmDelete = () => {
-    if (eventToDelete) {
-      onDelete(eventToDelete);
-      setOpenDeleteDialog(false);
-      setEventToDelete(null);
-    }
-  };
-
-  const handleCloseDeleteDialog = () => {
-    setOpenDeleteDialog(false);
-    setEventToDelete(null);
+  const handleCloseDetailsDialog = () => {
+    setOpenDetailsDialog(false);
+    setSelectedEvent(null);
   };
 
   const columns = [
-    { field: "id", headerName: "ID", width: 90 },
+    {
+      field: "serialNumber",
+      headerName: "S. No.",
+      width: 90,
+      renderCell: (params) => {
+        return params.api.getAllRowIds().indexOf(params.id) + 1; // Calculate serial number
+      },
+    },
     { field: "title", headerName: "Title", width: 150 },
-    { field: "description", headerName: "Description", width: 400 },
+    { field: "description", headerName: "Description", width: 300 },
     {
       field: "date",
       headerName: "Date and Time",
-      width: 180,
+      width: 140,
       renderCell: (params) => {
         const dateStr = params.value;
         if (dateStr) {
@@ -76,36 +74,52 @@ const EventGrid = ({
         return <span>No date provided</span>;
       },
     },
-    { field: "location", headerName: "Location", width: 150 },
+    { field: "location", headerName: "Location", width: 175 },
     ...(showActions
       ? [
           {
             field: "actions",
             headerName: "Actions",
-            width: isListMode ? 350 : 150,
+            width: isListMode ? 350 : 200,
             renderCell: (params) => {
               const eventId = params.row.id;
               if (isListMode) {
                 return registeredEvents.includes(eventId) ? (
-                  <div>
+                  <div style={{ display: "flex", gap: "10px" }}>
                     <Button
-                      sx={{ backgroundColor: "green", color: "white" }}
+                      sx={{
+                        backgroundColor: "#4CAF50",
+                        color: "white",
+                        ":hover": {
+                          backgroundColor: "#45A049",
+                        },
+                      }}
                       variant="outlined"
-                      color="primary"
                       onClick={() => handleRSVP(eventId, "attending")}
                     >
                       Attending
                     </Button>
                     <Button
-                      sx={{ backgroundColor: "red", color: "white" }}
+                      sx={{
+                        backgroundColor: "#f44336",
+                        color: "white",
+                        ":hover": {
+                          backgroundColor: "#e53935",
+                        },
+                      }}
                       variant="outlined"
-                      color="secondary"
                       onClick={() => handleRSVP(eventId, "not attending")}
                     >
                       Not Attending
                     </Button>
                     <Button
-                      sx={{ backgroundColor: "grey", color: "white" }}
+                      sx={{
+                        backgroundColor: "#9E9E9E",
+                        color: "white",
+                        ":hover": {
+                          backgroundColor: "#757575",
+                        },
+                      }}
                       variant="outlined"
                       onClick={() => handleRSVP(eventId, "maybe")}
                     >
@@ -114,9 +128,14 @@ const EventGrid = ({
                   </div>
                 ) : (
                   <Button
-                    sx={{ backgroundColor: "blue", color: "white" }}
+                    sx={{
+                      backgroundColor: "#2196F3",
+                      color: "white",
+                      ":hover": {
+                        backgroundColor: "#1976D2",
+                      },
+                    }}
                     variant="contained"
-                    color="secondary"
                     onClick={() => handleRegister(eventId)}
                   >
                     Register
@@ -125,9 +144,27 @@ const EventGrid = ({
               } else {
                 return (
                   <div>
-                    <Button onClick={() => onEdit(params.row)}>Edit</Button>
                     <Button
-                      onClick={() => handleDeleteClick(params.id)}
+                      sx={{
+                        color: "#2196F3",
+                        ":hover": {
+                          backgroundColor: "#1976D2",
+                          color: "white",
+                        },
+                      }}
+                      onClick={() => onEdit(params.row)}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      sx={{
+                        color: "#f44336",
+                        ":hover": {
+                          backgroundColor: "red",
+                          color: "white",
+                        },
+                      }}
+                      onClick={() => onDelete(params.id)} // Use onDelete from props
                       color="error"
                     >
                       Delete
@@ -139,6 +176,21 @@ const EventGrid = ({
           },
         ]
       : []),
+    // Add a new column for "Details" button
+    {
+      field: "details",
+      headerName: "Details",
+      width: 150,
+      renderCell: (params) => (
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => handleDetailsClick(params.row)}
+        >
+          Details
+        </Button>
+      ),
+    },
   ];
 
   return (
@@ -195,26 +247,38 @@ const EventGrid = ({
         />
       </div>
 
-      {/* Delete Confirmation Dialog */}
+      {/* Dialog for Event Details */}
       <Dialog
-        open={openDeleteDialog}
-        onClose={handleCloseDeleteDialog}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
+        open={openDetailsDialog}
+        onClose={handleCloseDetailsDialog}
+        fullWidth
+        maxWidth="sm"
       >
-        <DialogTitle id="alert-dialog-title">{"Delete Event?"}</DialogTitle>
+        <DialogTitle
+          sx={{
+            backgroundColor: "white", // Light grey background for contrast
+            color: "#000", // Black text for visibility
+          }}
+        >
+          {selectedEvent?.title}
+        </DialogTitle>
         <DialogContent>
-          <Typography>
-            Are you sure you want to delete this event? This action cannot be
-            undone.
+          <Typography variant="body1" gutterBottom>
+            {selectedEvent?.description}
+          </Typography>
+          <Typography variant="subtitle2" gutterBottom>
+            Location: {selectedEvent?.location}
+          </Typography>
+          <Typography variant="subtitle2" gutterBottom>
+            Date:{" "}
+            {selectedEvent
+              ? new Date(selectedEvent.date).toLocaleDateString()
+              : ""}
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseDeleteDialog} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleConfirmDelete} color="error" autoFocus>
-            Delete
+          <Button onClick={handleCloseDetailsDialog} color="primary">
+            Close
           </Button>
         </DialogActions>
       </Dialog>

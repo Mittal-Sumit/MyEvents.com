@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'users',
     'events',
     'rsvp',
+    'notifications',
     'corsheaders',
     'drf_api_logger',
     'django_filters', 

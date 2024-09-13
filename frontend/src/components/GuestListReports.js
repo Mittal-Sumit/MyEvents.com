@@ -1,4 +1,3 @@
-/* src/components/GuestListReports.js */
 import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import {
@@ -14,6 +13,7 @@ import axiosInstance from "../utils/axiosInstance";
 import { toast } from "react-toastify";
 import GuestListPopup from "./GuestListPopup";
 import { useNavigate } from "react-router-dom";
+import "./GuestListReports.css"; // Import the CSS file for styling
 
 const GuestListReports = () => {
   const [events, setEvents] = useState([]);
@@ -62,10 +62,15 @@ const GuestListReports = () => {
   );
 
   const eventColumns = [
-    { field: "id", headerName: "ID", width: 90 },
-    { field: "title", headerName: "Title", width: 200 },
-    { field: "location", headerName: "Location", width: 150 },
-    { field: "date", headerName: "Date", width: 150 },
+    {
+      field: "serialNumber",
+      headerName: "S.No",
+      width: 90,
+      renderCell: (params) => params.api.getAllRowIds().indexOf(params.id) + 1, // Serial number logic
+    },
+    { field: "title", headerName: "Title", width: 350 },
+    { field: "location", headerName: "Location", width: 350 },
+    { field: "date", headerName: "Date", width: 250 },
     {
       field: "actions",
       headerName: "Actions",

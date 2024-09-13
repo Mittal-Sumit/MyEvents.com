@@ -1,4 +1,4 @@
-/*src/components/Home/EventCard.js*/
+/* src/components/Home/EventCard.js */
 import React, { useState } from "react";
 import {
   Card,
@@ -17,7 +17,7 @@ const EventCard = ({ event }) => {
   const [open, setOpen] = useState(false);
 
   const defaultImage =
-    "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZXZlbnR8ZW58MHx8MHx8fDA%3D"; // You can replace this with a better placeholder
+    "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZXZlbnR8ZW58MHx8MHx8fDA%3D"; // Placeholder
   const eventImage = event.image ? event.image : defaultImage;
 
   const handleClickOpen = () => {
@@ -30,7 +30,7 @@ const EventCard = ({ event }) => {
 
   return (
     <>
-      <Card className="event-card" sx={{ border: "1px solid white" }}>
+      <Card className="event-card">
         <CardMedia
           component="img"
           height="140"
@@ -42,7 +42,7 @@ const EventCard = ({ event }) => {
           <Typography variant="h5" component="div">
             {event.title}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2" color="white">
             {event.description}
           </Typography>
           <Typography variant="subtitle2">
@@ -64,7 +64,14 @@ const EventCard = ({ event }) => {
 
       {/* Dialog for Event Details */}
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
-        <DialogTitle>{event.title}</DialogTitle>
+        <DialogTitle
+          sx={{
+            backgroundColor: "#f5f5f5", // Light grey background for contrast
+            color: "#000", // Black text for visibility
+          }}
+        >
+          {event.title}
+        </DialogTitle>
         <DialogContent>
           <img
             src={eventImage}

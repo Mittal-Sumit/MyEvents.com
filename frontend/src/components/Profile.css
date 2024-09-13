@@ -1,27 +1,78 @@
-/* src/components/Profile.css*/
-.profile-page {
-  padding: 20px;
-  max-width: 600px;
+.auth-container {
+  max-width: 500px;
   margin: 0 auto;
+  padding: 20px;
+  background-color: black;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.profile-page h4 {
+.auth-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.profile-info {
   margin-bottom: 20px;
 }
 
-.profile-page .MuiTypography-body1 {
+.auth-button {
+  width: 80%; /* Ensure the button width matches the input fields */
+  max-width: 500px;
+  border-radius: 30px;
+  border: 1px solid #fff; /* White border */
+  color: #000; /* Black text */
+  cursor: pointer;
+  font: bold 15px Helvetica, Arial, sans-serif;
+  height: 40px;
+  background: #fff; /* White background */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 15px auto; /* Center the button horizontally */
+}
+
+.auth-button:hover {
+  background-color: black;
+  color: white;
+}
+
+.auth-subtitle {
+  font-size: 18px;
   margin-bottom: 10px;
 }
 
-.profile-page button {
-  margin-top: 10px;
+.password-change-fields {
+  margin-top: 20px;
 }
 
-.dialog-content {
-  padding: 20px;
+.auth-profilec-input {
+  border-radius: 5px;
+  box-shadow: 0 1px 0 #000, 0 -2px 5px rgba(0, 0, 0, 0.08) inset;
+  background: #333; /* Dark gray background for input */
+  border: 1px solid #444; /* Slightly darker border */
+  color: #fff; /* White text */
+  font: 14px Helvetica, Arial, sans-serif;
+  margin: 0 0 15px;
+  padding: 15px 10px;
+  width: 300px; /* Increased width to 80% */
+  max-width: 500px; /* Add a maximum width for larger screens */
+  transition: all 0.3s ease;
+  display: block; /* Ensures it stays block-level */
+  margin-left: auto; /* Center horizontally */
+  margin-right: auto; /* Center horizontally */
 }
 
-.dialog-actions {
-  display: flex;
-  justify-content: flex-end;
+@media (max-width: 600px) {
+  .auth-container {
+    padding: 15px;
+  }
+
+  .auth-title {
+    font-size: 20px;
+  }
+
+  .auth-button {
+    width: 100%;
+  }
 }

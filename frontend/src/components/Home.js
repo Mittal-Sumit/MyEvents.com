@@ -161,7 +161,7 @@ const Home = () => {
       </div>
 
       <div className="main-content" ref={upcomingEventsRef}>
-        <h1>Upcoming Events</h1>
+        <h1>Check Some Upcoming Events</h1>
         <div className="event-grid">
           {events.map((event) => (
             <EventCard key={event.id} event={event} />

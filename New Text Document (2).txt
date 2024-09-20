@@ -1,0 +1,9 @@
+aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 626635443051.dkr.ecr.ap-south-1.amazonaws.com
+
+docker tag myevents-backend:latest 626635443051.dkr.ecr.ap-south-1.amazonaws.com/myevnts-backend:latest
+
+docker tag my-frontend:latest 626635443051.dkr.ecr.ap-south-1.amazonaws.com/my-frontend:latest
+
+docker push 626635443051.dkr.ecr.ap-south-1.amazonaws.com/myevents-backend:latest
+
+docker push 626635443051.dkr.ecr.ap-south-1.amazonaws.com/my-frontend:latest

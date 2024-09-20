@@ -10,7 +10,7 @@ export const handleRegistration = async (
 ) => {
   try {
     const response = await axios.post(
-      "http://localhost:8000/api/users/register/",
+      `${process.env.REACT_APP_API_URL}/api/users/register/`,
       {
         username,
         email,

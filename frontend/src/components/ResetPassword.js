@@ -16,7 +16,7 @@ const ResetPassword = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/users/reset_password/",
+        `${process.env.REACT_APP_API_URL}/api/users/reset_password/`,
         { email }
       );
       toast.success(response.data.message);

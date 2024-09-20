@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:8000/api/",
+  baseURL: `${process.env.REACT_APP_API_URL}/api/`,
 });
 
 axiosInstance.interceptors.request.use(

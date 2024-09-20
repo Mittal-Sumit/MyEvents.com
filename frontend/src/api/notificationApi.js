@@ -2,7 +2,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const API_URL = "http://localhost:8000/api/notifications/";
+const API_URL = `${process.env.REACT_APP_API_URL}/api/notifications/`;
 
 export const fetchNotifications = async () => {
   const token = sessionStorage.getItem("accessToken");

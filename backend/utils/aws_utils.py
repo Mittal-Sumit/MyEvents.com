@@ -20,7 +20,10 @@ session = boto3.Session(
 
 
 def get_secret(secret_name):
-    client = session.client('secretsmanager')
+    client = session.client(
+        service_name='secretsmanager',
+        region_name='ap-south-1'  # e.g., 'us-east-1'
+    )
 
     try:
         # Fetch the secret value

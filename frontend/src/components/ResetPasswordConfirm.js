@@ -31,7 +31,7 @@ const ResetPasswordConfirm = () => {
     }
     try {
       await axios.post(
-        `http://localhost:8000/api/users/reset_password_confirm/${uid}/${token}/`,
+        `${process.env.REACT_APP_API_URL}/api/users/reset_password_confirm/${uid}/${token}/`,
         { password }
       );
       toast.success("Password has been reset successfully.");

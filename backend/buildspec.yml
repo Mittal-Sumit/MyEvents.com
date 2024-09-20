@@ -1,0 +1,28 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Installing Python dependencies for backend"
+      - pip install -r requirements.txt
+
+  pre_build:
+    commands:
+      - echo "Running Django migrations"
+      - python manage.py migrate
+      - echo "Logging in to Amazon ECR"
+      - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 626635443051.dkr.ecr.ap-south-1.amazonaws.com
+      - echo "Running Django tests"
+      - python manage.py test
+
+  build:
+    commands:
+      - echo "Building the Docker image for backend"
+      - docker build -t myevents-backend .
+      - docker tag myevents-backend:latest 626635443051.dkr.ecr.ap-south-1.amazonaws.com/myevents-backend:latest
+      - echo "Pushing the Docker image to ECR"
+      - docker push 626635443051.dkr.ecr.ap-south-1.amazonaws.com/myevents-backend:latest
+
+artifacts:
+  files:
+    - "**/*"

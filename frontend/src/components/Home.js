@@ -152,8 +152,6 @@ const Home = () => {
         />
       </div>
 
-      <div className="fullscreen-image-header" ref={addToSections}></div>
-
       <div ref={addToSections}>
         <AboutUsSection />
       </div>

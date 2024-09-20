@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 // Create a new Axios instance just for RSVP purposes
 const rsvpAxios = axios.create({
-  baseURL: "http://localhost:8000/api/rsvp/",
+  baseURL: `${process.env.REACT_APP_API_URL}/api/rsvp/`,
 });
 
 // Add the Authorization header manually for each request

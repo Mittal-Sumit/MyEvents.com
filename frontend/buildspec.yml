@@ -1,0 +1,23 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Installing dependencies for frontend"
+      - npm install
+
+  build:
+    commands:
+      - echo "Building the React app"
+      - npm run build
+      - echo "Logging in to Amazon ECR"
+      - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 626635443051.dkr.ecr.ap-south-1.amazonaws.com
+      - echo "Building the Docker image for frontend"
+      - docker build -t my-frontend .
+      - docker tag my-frontend:latest 626635443051.dkr.ecr.ap-south-1.amazonaws.com/my-frontend:latest
+      - echo "Pushing the Docker image to ECR"
+      - docker push 626635443051.dkr.ecr.ap-south-1.amazonaws.com/my-frontend:latest
+
+artifacts:
+  files:
+    - "**/*"

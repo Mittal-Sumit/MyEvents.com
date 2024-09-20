@@ -168,36 +168,12 @@ body {
   }
 }
 
-/* Fullscreen Image Header */
-.fullscreen-image-header {
-  background-image: url("C:/Users/susha/OneDrive/Desktop/MyEvent.com/frontend/public/concert.jpg");
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  text-align: center;
-  font-size: 48px;
-  position: relative;
-  z-index: 1;
-}
-
 /* Responsive Adjustments for Fullscreen Image */
 @media (max-width: 768px) {
   .fullscreen-image-header {
     height: 80vh;
     font-size: 36px;
     padding: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .fullscreen-image-header {
-    height: 60vh;
-    font-size: 24px;
-    padding: 10px;
   }
 }
 

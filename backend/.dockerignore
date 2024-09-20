@@ -1,0 +1,12 @@
+authenv
+__pycache__
+.dockerignore
+Dockerfile
+docker-compose.yml
+.git
+*.pyc
+*.pyo
+*.pyd
+*.db
+.gitignore
+Pipfile*

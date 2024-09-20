@@ -3,6 +3,8 @@ version: 0.2
 phases:
   pre_build:
     commands:
+      - echo "Logging in to Docker Hub"
+      - docker login --username sumitmittal2002 --password password@password
       - echo "Logging in to Amazon ECR"
       - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 626635443051.dkr.ecr.ap-south-1.amazonaws.com
 
@@ -13,7 +15,12 @@ phases:
       - docker tag myevents-backend:latest 626635443051.dkr.ecr.ap-south-1.amazonaws.com/myevents-backend:latest
       - echo "Pushing the Docker image to ECR"
       - docker push 626635443051.dkr.ecr.ap-south-1.amazonaws.com/myevents-backend:latest
+  post_build:
+    commands:
+      - echo "Writing image definitions"
+      - printf '[{"name":"my-backend-task","imageUri":"626635443051.dkr.ecr.ap-south-1.amazonaws.com/myevents-backend:latest"}]' > imagedefinitions.json
+      - echo "Image definitions file created"
 
 artifacts:
   files:
-    - "**/*"
+    - imagedefinitions.json

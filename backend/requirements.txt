@@ -33,7 +33,7 @@ jmespath==1.0.1
 kombu==5.4.0
 pillow==10.4.0
 prompt_toolkit==3.0.47
-psycopg2==2.9.9
+psycopg2-binary==2.9.9
 PyJWT==2.9.0
 python-crontab==3.2.0
 python-dateutil==2.9.0.post0

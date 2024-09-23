@@ -169,7 +169,7 @@ const Home = () => {
         </div>
         <div className="view-all-events">
           <Link to="/event-list" className="view-all-link">
-            View All Events
+            All Events
           </Link>
         </div>
       </div>

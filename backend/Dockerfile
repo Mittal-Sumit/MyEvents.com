@@ -1,6 +1,9 @@
 # Use an official Python runtime as a parent image
 FROM python:3.12-slim
 
+# Install PostgreSQL development libraries and other dependencies
+RUN apt-get update && apt-get install -y libpq-dev gcc
+
 # Set the working directory inside the container
 WORKDIR /app
 

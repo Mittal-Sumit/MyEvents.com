@@ -112,7 +112,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',  
         'NAME': 'myevent_db', 
         'USER': 'sumit', 
-        'PASSWORD': 'sumit20092002',  
+        'PASSWORD': get_parameter('/myevent/db_password'),  
         'HOST': 'my-event-database.cny06aeq4yzy.ap-south-1.rds.amazonaws.com',  
         'PORT': '5432',  
     }

@@ -47,3 +47,8 @@ class GuestList(models.Model):
 
     class Meta:
         unique_together = ('event', 'guest_name')  # Ensure guest is unique for an event
+        indexes = [
+            models.Index(fields=['event']),          # Index on event
+            models.Index(fields=['status']),         # Index on status
+            models.Index(fields=['guest_name']),     # Index on guest name
+        ]

@@ -1,3 +1,5 @@
+# notifications/tasks.py
+
 from django.core.mail import send_mail
 from django.utils import timezone
 from rsvp.models import Event, RSVP  # Importing your models from rsvp

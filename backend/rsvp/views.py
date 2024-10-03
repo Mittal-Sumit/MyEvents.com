@@ -9,6 +9,12 @@ from events.serializers import EventSerializer
 from rest_framework.decorators import action
 from rest_framework.exceptions import PermissionDenied
 from notifications.models import Notification  # Import Notification model
+import boto3
+from botocore.exceptions import ClientError
+from datetime import datetime
+
+dynamodb = boto3.resource('dynamodb', region_name='ap-south-1')  # Update with your region
+reminders_table = dynamodb.Table('EventReminders')
 
 
 class RSVPListCreateView(generics.ListCreateAPIView):
@@ -109,6 +115,18 @@ class RegisterForEventView(generics.CreateAPIView):
             email=user.email,
             status='attending'  
         )
+         # Add reminder info to DynamoDB
+        try:
+            reminders_table.put_item(
+                Item={
+                    'event_id': str(event_id),
+                    'event_title': event.title,
+                    'event_date': event.date.isoformat(),
+                    'reminder_sent': False
+                }
+            )
+        except ClientError as e:
+            print(f"Error storing event reminder: {e}")
 
         return Response({'message': 'Successfully registered for event with default RSVP of attending'}, status=status.HTTP_201_CREATED)
 
